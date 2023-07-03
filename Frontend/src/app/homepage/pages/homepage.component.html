@@ -14,12 +14,12 @@
                     </div>
                 </div>
 
-                <div class="mt-5 d-flex p-3 justify-content-between align-items-center boton-analizar w-sm-75 w-md-50 w-lg-50 w-xl-50">
-                    <div class="borde-titulo">
-                        <h3>Subir Imagen</h3>
+                <div class="mt-5 d-flex p-3 justify-content-between align-items-center boton-analizar w-sm-75 w-md-50" (click)="abrirExploradorArchivos()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+                    <div class="drag-drop-container" [class.dragging]="isDragging">
+                      <img [src]="assetPath4" alt="camara" class="camara">
+                      <p class="drag-drop-text">Arrastra y suelta la imagen  <br> <span style="font-weight: bolder;"> o </span> <span style="color: #388E3C;">   <br>selecciona del explorador </span> </p>
                     </div>
-                    <img [src]="assetPath4" alt="camara" class="camara" >
-                </div>
+                  </div>
             </div>
         </div>
     </div>

@@ -34,6 +34,25 @@
 .borde-titulo{
     text-align: center;
     width: 75%;
-    border-right: solid;
 }
 
+.drag-drop-container {
+    border: 2px dashed #7F7F7F;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .drag-drop-container.dragging {
+    background-color: #f7f7f7;
+  }
+  
+  .drag-drop-text {
+    color: #7F7F7F;
+    font-weight: bolder;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  
