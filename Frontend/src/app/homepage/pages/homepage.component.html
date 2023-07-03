@@ -19,6 +19,15 @@
                       <img [src]="assetPath4" alt="camara" class="camara">
                       <p class="drag-drop-text">Arrastra y suelta la imagen  <br> <span style="font-weight: bolder;"> o </span> <span style="color: #388E3C;">   <br>selecciona del explorador </span> </p>
                     </div>
+                </div>
+                <div *ngIf="showUploadProgress" class="upload-progress" style="font-weight: bolder;">
+                    <p>Cargando imagen...</p>
+                    <div class="spinner"></div>
+                  </div>
+                  
+                  <div *ngIf="uploadComplete && !showUploadProgress" class="upload-complete" style="font-weight: bolder;">
+                    <p>La imagen <span style="color: #388E3C;"> {{selectedFile.name}} </span>se ha cargado exitosamente.</p>
+                    <button (click)="continuar()">Continuar -> </button>
                   </div>
             </div>
         </div>

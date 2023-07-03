@@ -55,4 +55,49 @@
     margin-top: 10px;
   }
 
+  .upload-progress {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
   
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    animation: spin 0.8s linear infinite;
+    margin-right: 10px;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .upload-progress p {
+    margin: 0;
+    margin-right: 5px; /* Agrega el espacio entre el spinner y el párrafo aquí */
+  }
+  
+  .upload-complete {
+    margin-top: 10px;
+  }
+  
+  .upload-complete button {
+    padding: 10px 20px;
+    background-color: #388E3C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .upload-complete button:hover{
+    box-shadow: 5px 5px 21px rgba(33,33,33,.2); 
+
+  }
+

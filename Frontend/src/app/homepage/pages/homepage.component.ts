@@ -11,8 +11,11 @@ export class HomepageComponent implements OnInit {
   assetPath2: string | undefined;
   assetPath3: string | undefined;
   assetPath4: string | undefined;
-  
+  selectedFile: any;
+
   isDragging = false;
+  showUploadProgress = false;
+  uploadComplete = false;
 
 
 
@@ -38,10 +41,21 @@ export class HomepageComponent implements OnInit {
     this.isDragging = false;
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
-      const selectedFile = files[0];
-      // Aquí puedes hacer algo con la imagen seleccionada, como subirla al servidor
-      console.log('Imagen seleccionada:', selectedFile);
+      this.selectedFile = files[0];
+      this.showUploadProgress = true;
+      this.uploadComplete = false; // Restablecer el estado de uploadComplete
+  
+      // Simulación de carga de imagen (reemplaza con tu lógica de carga real)
+      setTimeout(() => {
+        // Lógica de carga completa
+        this.showUploadProgress = false;
+        this.uploadComplete = true;
+      }, 2000);
     }
+  }
+
+  continuar() {
+    // Lógica para continuar después de la carga completa
   }
 
   // Función para abrir el explorador de archivos al hacer clic en el div
@@ -52,10 +66,17 @@ export class HomepageComponent implements OnInit {
     fileInput.style.display = 'none';
 
     fileInput.addEventListener('change', (event: any) => {
-      const selectedFile = event.target.files[0];
+      this.selectedFile = event.target.files[0];
       // Aquí puedes hacer algo con la imagen seleccionada, como subirla al servidor
-      console.log('Imagen seleccionada:', selectedFile);
+      this.showUploadProgress = true;
+      this.uploadComplete = false; // Restablecer el estado de uploadComplete
   
+      // Simulación de carga de imagen (reemplaza con tu lógica de carga real)
+      setTimeout(() => {
+        // Lógica de carga completa
+        this.showUploadProgress = false;
+        this.uploadComplete = true;
+      }, 2000);
     });
 
     document.body.appendChild(fileInput);
