@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HistoryListRoutingModule } from './history-list-routing.module';
 import { HistoryListComponent } from './pages/history-list.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { HistoryListComponent } from './pages/history-list.component';
   ],
   imports: [
     CommonModule,
-    HistoryListRoutingModule
+    HistoryListRoutingModule,
+    SharedModule
   ]
 })
 export class HistoryListModule { }

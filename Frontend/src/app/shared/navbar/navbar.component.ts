@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  assetPath: string | undefined;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.assetPath = `${document.baseURI}assets/mosquito_logo.png`;
+
   }
 
 }

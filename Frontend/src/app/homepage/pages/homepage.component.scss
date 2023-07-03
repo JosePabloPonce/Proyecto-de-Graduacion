@@ -1,0 +1,39 @@
+.color{
+    background-color: #8BC34A;
+    color: #F2F9F1;
+}
+
+.huevos{
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+}
+
+.flecha{
+    max-width: 10%;
+    height: auto;
+}
+
+.camara{
+ height: auto; 
+ width: 10%;
+
+}
+.boton-analizar{
+    border-radius: 20px;
+    background: #DDEEDF;
+    color: #388E3C;
+    cursor: pointer;
+}
+
+.boton-analizar:hover {
+    box-shadow: 5px 5px 21px rgba(33,33,33,.2); 
+  }
+
+
+.borde-titulo{
+    text-align: center;
+    width: 75%;
+    border-right: solid;
+}
+
