@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HistoryListRoutingModule } from './history-list-routing.module';
 import { HistoryListComponent } from './pages/history-list.component';
 import { SharedModule } from '@app/shared/shared.module';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { SharedModule } from '@app/shared/shared.module';
   imports: [
     CommonModule,
     HistoryListRoutingModule,
-    SharedModule
+    SharedModule,
+    NzTableModule,
+    NzPaginationModule
   ]
 })
 export class HistoryListModule { }
