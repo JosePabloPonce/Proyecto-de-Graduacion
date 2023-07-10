@@ -13,15 +13,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   formLogin: FormGroup;
+    assetPath: string;
+    google: string;
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    
   ) {
     this.formLogin = new FormGroup({
       email: new FormControl(),
       password: new FormControl()
     })
+    this.assetPath = `${document.baseURI}assets/next.png`;
+    this.google = `${document.baseURI}assets/google.png`;
   }
 
   ngOnInit(): void {
@@ -39,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.userService.loginWithGoogle()
       .then(response => {
         console.log(response);
-        this.router.navigate(['/main']);
+        this.router.navigate(['/home']);
       })
       .catch(error => console.log(error))
   }

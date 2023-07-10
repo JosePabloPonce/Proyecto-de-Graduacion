@@ -1,0 +1,49 @@
+.login-container{
+    background-color: #8BC34A;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: #F2F9F1;
+
+}
+
+h2{
+    color: #F2F9F1;
+    letter-spacing: 1px;
+    font-size: 42px;
+    margin-top: 2%;
+}
+
+.button-google{
+    width: 14%;
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    color: black;
+    margin-top: 1%;
+}
+
+.button-sign{
+    width: 14%;
+    background-color: #388E3C;
+    border: 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    margin-top: 1%;
+}
+
+.logo{
+    margin-top: -10%;
+}
+
+img{
+    width: 12%;
+    
+}
