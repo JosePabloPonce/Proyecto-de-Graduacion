@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
     path:'home',
-    loadChildren: () => import('@homepage/homepage.module').then(m => m.HomepageModule)
+    loadChildren: () => import('@homepage/homepage.module').then(m => m.HomepageModule),
+    ...canActivate(() => redirectUnauthorizedTo(['/login']))
+
+  },
+  {
+    path:'login',
+    loadChildren: () => import('@login/login.module').then(m => m.LoginModule)
 
   },
   {
@@ -14,17 +21,20 @@ const routes: Routes = [
   },
   {
     path:'about-us',
-    loadChildren: () => import('@about-us/about-us.module').then(m => m.AboutUsModule)
+    loadChildren: () => import('@about-us/about-us.module').then(m => m.AboutUsModule),
+    ...canActivate(() => redirectUnauthorizedTo(['/login']))
 
   },
   {
     path:'history-list',
-    loadChildren: () => import('@history-list/history-list.module').then(m => m.HistoryListModule)
+    loadChildren: () => import('@history-list/history-list.module').then(m => m.HistoryListModule),
+    ...canActivate(() => redirectUnauthorizedTo(['/login']))
 
   },
   {
     path:'history-details',
-    loadChildren: () => import('@history-details/history-details.module').then(m => m.HistoryDetailsModule)
+    loadChildren: () => import('@history-details/history-details.module').then(m => m.HistoryDetailsModule),
+    ...canActivate(() => redirectUnauthorizedTo(['/login']))
 
   },
   {

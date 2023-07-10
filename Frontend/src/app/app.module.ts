@@ -10,6 +10,12 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {provideAuth,getAuth} from '@angular/fire/auth'
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '@environments/environment';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     AppRoutingModule,
     NzI18nModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(()=> getAuth())
   ],
   providers: [{ provide: NZ_I18N, useValue: es_ES }],
   bootstrap: [AppComponent]
