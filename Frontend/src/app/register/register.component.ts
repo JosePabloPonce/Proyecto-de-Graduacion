@@ -11,6 +11,7 @@ import { UserService } from '@app/services/user.services';
 export class RegisterComponent implements OnInit {
 
   formReg: FormGroup;
+  assetPath: string;
 
   constructor(
     private userService: UserService,
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
       email: new FormControl(),
       password: new FormControl()
     })
+    this.assetPath = `${document.baseURI}assets/next.png`;
   }
 
   ngOnInit(): void {
