@@ -26,6 +26,13 @@ h2{
     justify-content: space-evenly;
     color: black;
     margin-top: 1%;
+
+    @media (max-width: 480px) {
+        margin-top: 3%;
+        width: 40%;
+        height: 35px;
+        align-items: center;
+      }
 }
 
 .button-sign{
@@ -37,10 +44,20 @@ h2{
     justify-content: space-evenly;
     color: white;
     margin-top: 1%;
+
+    @media (max-width: 480px) {
+        width: 40%;
+        height: 35px;
+        align-items: center;
+      }
 }
 
 .logo{
     margin-top: -10%;
+
+    @media (max-width: 480px) {
+        width: 30%;
+      }
 }
 
 img{
