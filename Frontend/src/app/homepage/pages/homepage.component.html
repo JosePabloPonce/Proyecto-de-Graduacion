@@ -1,0 +1,37 @@
+
+
+<div class="container-fluid color" style=" padding-bottom: 10px; padding-top: 100px; min-height: 100%">
+<app-navbar></app-navbar>
+<div  style="height: 100%">
+    <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" >Clasificador de Huevos de Mosquito con <br> Inteligencia Artificial</h1>
+        <div class=" d-flex flex-column justify-content-around align-items-center text-center">       
+            <div class="d-flex flex-column align-items-center">
+                <div>
+                    <div style="height: 100%;" class="d-flex flex-column flex-sm-row justify-content-center align-items-center pb-3">
+                        <img [src]="assetPath" alt="huevos" class="huevos img-thumbnail rounded" >
+                        <img [src]="assetPath2" alt="flecha" class="flecha" >
+                        <img [src]="assetPath3" alt="huevos" class="huevos img-thumbnail rounded" >
+                    </div>
+                </div>
+
+                <div class="mt-5 d-flex p-3 justify-content-between align-items-center boton-analizar w-sm-75 w-md-50" (click)="abrirExploradorArchivos()" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+                    <div class="drag-drop-container" [class.dragging]="isDragging">
+                      <img [src]="assetPath4" alt="camara" class="camara">
+                      <p class="drag-drop-text">Arrastra y suelta la imagen  <br> <span style="font-weight: bolder;"> o </span> <span style="color: #388E3C;">   <br>selecciona del explorador </span> </p>
+                    </div>
+                </div>
+                <div *ngIf="showUploadProgress" class="upload-progress" style="font-weight: bolder;">
+                    <p>Cargando imagen...</p>
+                    <div class="spinner"></div>
+                  </div>
+                  
+                  <div *ngIf="uploadComplete && !showUploadProgress" class="upload-complete" style="font-weight: bolder;">
+                    <p>La imagen <span style="color: #388E3C;"> {{selectedFile.name}} </span>se ha cargado exitosamente.</p>
+                    <button (click)="continuar()">Continuar -> </button>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
