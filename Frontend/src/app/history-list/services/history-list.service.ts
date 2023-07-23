@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RandomUser } from '../Interfaces/RandomUser';
+import { IConteos } from '../Interfaces/IConteos';
 
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -17,7 +17,7 @@ export class RandomUserService {
     sortField: string | null,
     sortOrder: string | null,
     filters: Array<{ key: string; value: string[] }>
-  ): Observable<{ results: RandomUser[] }> {
+  ): Observable<{ results: IConteos[] }> {
     let params = new HttpParams()
       .append('page', `${pageIndex}`)
       .append('results', `${pageSize}`)
@@ -29,7 +29,7 @@ export class RandomUserService {
       });
     });
     return this.http
-      .get<{ results: RandomUser[] }>(`${this.randomUserUrl}`, { params })
+      .get<{ results: IConteos[] }>(`${this.randomUserUrl}`, { params })
       .pipe(catchError(() => of({ results: [] })));
   }
 

@@ -1,4 +1,4 @@
-export interface RandomUser {
+export interface IConteos {
   gender: string;
   email: string;
   name: {
@@ -6,4 +6,7 @@ export interface RandomUser {
     first: string;
     last: string;
   };
+  login: {
+    uuid:string
+  }
 }

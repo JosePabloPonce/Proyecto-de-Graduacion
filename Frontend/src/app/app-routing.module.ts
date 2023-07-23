@@ -37,7 +37,7 @@ const routes: Routes = [
 
   },
   {
-    path:'history-details',
+    path:'history-details/:id',
     loadChildren: () => import('@history-details/history-details.module').then(m => m.HistoryDetailsModule),
     ...canActivate(() => redirectUnauthorizedTo(['/login']))
 

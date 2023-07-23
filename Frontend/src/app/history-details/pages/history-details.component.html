@@ -1,2 +1,62 @@
-<app-navbar></app-navbar>
-<p>history-details works!</p>
+<div class="container-fluid color" style= "min-height: 100%">
+    <div class="container" style=" padding-bottom: 10px; padding-top: 100px;">
+        <app-navbar></app-navbar>
+        <div  style="height: 100%;">
+            
+            <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Datos Generales </h1>
+            <nz-table  #basicTable nzFrontPagination ="false" nzTableLayout="fixed" [nzScroll]="{ x: '650px' }" [nzData]="listOfData">
+                <thead>
+                <tr class="custom-header">
+                    <th nzAlign="center">Cepa</th>
+                    <th nzAlign="center">Generación</th>
+                    <th nzAlign="center">Código Crianza</th>
+                    <th nzAlign="center">Especie</th>
+                    <th nzAlign="center">Código Responsable</th>
+                    <th nzAlign="center">Total Huevos Intactos</th>
+                </tr>
+                </thead>
+                <tbody class="custom-body">
+                <tr *ngFor="let data of basicTable.data">
+                    <td nzAlign="center">{{ data.cepa }}</td>
+                    <td nzAlign="center">{{ data.generacion }}</td>
+                    <td nzAlign="center">{{ data.codigo_crianza }}</td>
+                    <td nzAlign="center">{{ data.especie }}</td>
+                    <td nzAlign="center">{{ data.codigo_responsable }}</td>
+                    <td nzAlign="center">{{ data.total_huevos_intactos }}</td>
+                </tr>
+                </tbody>
+            </nz-table>
+
+            <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Conteo de Huevecillos </h1>
+            <nz-table  #basicTable2 nzFrontPagination ="false" nzTableLayout="fixed" [nzScroll]="{ x: '1100px' }" [nzData]="listOfData2">
+                <thead>
+                <tr class="custom-header">
+                    <th nzAlign="center">Código Sustrato</th>
+                    <th nzAlign="center">Fecha Colocación Sustrato</th>
+                    <th nzAlign="center" >Fecha Retiro Sustrato</th>
+                    <th nzAlign="center">Huevos Intactos</th>
+                    <th nzAlign="center">Huevos Eclosionados</th>
+                    <th nzAlign="center">Huevos en Canoa</th>
+                    <th nzAlign="center">Total de Huevos</th>
+                    <th nzAlign="center">Generacion Filial</th>
+                    <th nzAlign="center">Responsable Conteo Huevos</th>
+                </tr>
+                </thead>
+                <tbody class="custom-body">
+                <tr *ngFor="let data of basicTable2.data">
+                    <td nzAlign="center">{{ data.codigo_sustrato }}</td>
+                    <td nzAlign="center">{{ data.fecha_colocacion_sustrato }}</td>
+                    <td nzAlign="center">{{ data.fecha_retiro_sustrato }}</td>
+                    <td nzAlign="center">{{ data.huevos_intactos }}</td>
+                    <td nzAlign="center">{{ data.huevos_eclosionados }}</td>
+                    <td nzAlign="center">{{ data.huevos_en_canoa }}</td>
+                    <td nzAlign="center">{{ data.total_huevos }}</td>
+                    <td nzAlign="center">{{ data.generacion_filial }}</td>
+                    <td nzAlign="center">{{ data.responsable_conteo_huevos }}</td>
+                </tr>
+                </tbody>
+            </nz-table>
+
+        </div>
+    </div>
+</div>
