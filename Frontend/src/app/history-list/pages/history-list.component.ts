@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RandomUser } from '../Interfaces/RandomUser';
+import { IConteos } from '../Interfaces/IConteos';
 import { RandomUserService } from '../services/history-list.service';
 
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -12,7 +12,7 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 export class HistoryListComponent implements OnInit {
 
   total = 1;
-  listOfRandomUser: RandomUser[] = [];
+  listOfRandomUser: IConteos[] = [];
   loading = true;
   pageSize = 10;
   pageIndex = 1;
