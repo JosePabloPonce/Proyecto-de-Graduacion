@@ -1,5 +1,5 @@
 export interface IDatosGenerales {
-    id: number;
+    id: string;
     cepa: string;
     generacion: string;
     codigo_crianza: string;
