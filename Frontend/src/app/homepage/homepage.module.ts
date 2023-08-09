@@ -5,6 +5,9 @@ import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './pages/homepage.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
+import { PopupComponent } from '../popup/popup.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -15,7 +18,8 @@ import { SharedModule } from '@app/shared/shared.module';
     CommonModule,
     HomepageRoutingModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ]
 })
 export class HomepageModule { }

@@ -1,0 +1,45 @@
+::ng-deep  .modal-container > mat-dialog-container {
+    //margin-left: 5vw;
+    //margin-top: 5vh;
+    //padding-top: 100px;
+    //display: flex;
+    width: 90vw;
+    height: 60vh;
+    max-width: 100vw;
+    margin-left: 5vw;
+    margin-top: 14vh;
+    border: #388E3C 1px;
+
+    .table-container{
+        width: 80%;
+
+    }
+
+    .buttons-container{
+        margin-top: 3vh;
+        justify-content: space-evenly;
+        button{
+            padding: 10px 20px;
+            background-color: #388E3C;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100000000000;
+        }
+    }
+  }
+  .custom-header {
+    background-color: #388E3C; /* Cambia este color al que desees */
+  }
+
+.custom-header th{
+    background-color: #388E3C; /* Cambia este color al que desees */
+    color: #F2F9F1;
+
+  }
+
+.custom-body {
+    background-color: #DDEEDF;
+  }   

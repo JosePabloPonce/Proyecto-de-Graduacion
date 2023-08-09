@@ -14,11 +14,17 @@ import {provideAuth,getAuth} from '@angular/fire/auth'
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '@environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PopupComponent } from './popup/popup.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzI18nModule,
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(()=> getAuth())
+    provideAuth(()=> getAuth()),
+    SharedModule,
+    NzTableModule,
+    NzPaginationModule
   ],
   providers: [{ provide: NZ_I18N, useValue: es_ES }],
   bootstrap: [AppComponent]

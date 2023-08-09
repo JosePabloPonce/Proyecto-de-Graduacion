@@ -1,0 +1,30 @@
+<div class="row w-100 h-100 justify-content-center align-items-center flex-column" style="background-color: white; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: #388E3C; border-width: 5px;">
+    <h2 class="text-center">CONTEO</h2>
+    <div class="table-container">
+      <nz-table nzTableLayout="fixed" [nzNoResult]="'Resultados del modelo'" [nzShowPagination]="false">
+        <thead>
+            <tr class="custom-header">
+                <th nzAlign="center">Responsable</th>
+                <th nzAlign="center">HV</th>
+                <th nzAlign="center">HE</th>
+                <th nzAlign="center">HEC</th>
+                <th nzAlign="center">Total</th>
+            </tr>
+        </thead>
+        <tbody class="custom-body">
+            <tr *ngFor="let data of tableData" class="custom-body">
+                <td nzAlign="center">{{ data.responsable }}</td>
+                <td nzAlign="center">{{ data.hv }}</td>
+                <td nzAlign="center">{{ data.he }}</td>
+                <td nzAlign="center">{{ data.hec }}</td>
+                <td nzAlign="center">{{ data.total }}</td>
+            </tr>
+        </tbody>
+    </nz-table>
+    </div>
+    <div class="buttons-container d-flex flex-row">
+        <button>Predecir</button>
+        <button>Guardar</button>
+        <button (click)="onClose()">Regresar</button>
+    </div>
+</div>

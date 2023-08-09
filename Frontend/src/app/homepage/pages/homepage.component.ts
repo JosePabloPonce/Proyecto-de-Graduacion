@@ -1,4 +1,6 @@
 import { Component, OnInit, Renderer2  } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '@app/popup/popup.component';
 
 @Component({
   selector: 'app-homepage',
@@ -19,7 +21,7 @@ export class HomepageComponent implements OnInit {
 
 
 
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.assetPath = `${document.baseURI}assets/huevos.png`;
@@ -54,8 +56,23 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  continuar() {
+  continuar(): void {
     // Lógica para continuar después de la carga completa
+    // Llamamos a la función para abrir el popup
+    this.openPopup();
+  }
+
+
+
+  openPopup(): void {
+    const dialogRef = this.dialog.open(PopupComponent,{
+      panelClass: 'modal-container',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   // Función para abrir el explorador de archivos al hacer clic en el div
