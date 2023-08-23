@@ -1,5 +1,5 @@
 export interface IConteoDeHuevecillos {
-    id: number;
+    id: string;
     codigo_sustrato: string;
     fecha_colocacion_sustrato: string;
     fecha_retiro_sustrato: string;

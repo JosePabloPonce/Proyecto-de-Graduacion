@@ -6,6 +6,8 @@ import { HistoryDetailsComponent } from './pages/history-details.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { FormsModule } from '@angular/forms';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     HistoryDetailsRoutingModule,
     SharedModule,
     NzTableModule,
-    NzPaginationModule
+    NzPaginationModule,
+    FormsModule,
+    NzPopconfirmModule
   ]
 })
 export class HistoryDetailsModule { }
