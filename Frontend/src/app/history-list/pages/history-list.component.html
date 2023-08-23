@@ -5,29 +5,31 @@
         <div  style="height: 100%;">
             <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Historial de Detecciones </h1>
     
-            <nz-table nzTableLayout="fixed" nzShowSizeChanger [nzData]="listOfRandomUser" [nzFrontPagination]="false"
-            [nzLoading]="loading" [nzTotal]="total" [nzPageSize]="pageSize" [nzPageIndex]="pageIndex"
-            (nzQueryParams)="onQueryParamsChange($event)">
-            <thead>
+            <nz-table #editRowTable  #basicTable [nzLoading]="loading"  nzTableLayout="fixed" [nzScroll]="{ x: '1500px' }" [nzData]="listOfRandomUser">
+              <thead>
               <tr class="custom-header">
-                <th nzAlign="center" nzColumnKey="name" [nzSortFn]="true">Responsable Conteo</th>
-                <th nzAlign="center" nzColumnKey="gender" [nzFilters]="filterGender" [nzFilterFn]="true">Fecha</th>
-                <th nzAlign="center" nzColumnKey="email" [nzSortFn]="true">Total</th>
-                <th nzAlign="center">Mas</th>
-
+                  <th nzAlign="center">Cepa</th>
+                  <th nzAlign="center">Generación</th>
+                  <th nzAlign="center">Código Crianza</th>
+                  <th nzAlign="center">Especie</th>
+                  <th nzAlign="center">Código Responsable</th>
+                  <th nzAlign="center">Total Huevos Intactos</th>
+                  <th nzAlign="center">Mas</th>
               </tr>
-            </thead>
-            <tbody class="custom-body">
-              <tr *ngFor="let data of listOfRandomUser">
-                <td nzAlign="center">{{ data.name.first }} {{ data.name.last }}</td>
-                <td nzAlign="center">{{ data.gender }}</td>
-                <td nzAlign="center">{{ data.login.uuid }}</td>
-                <td nzAlign="center">
-                    <a [routerLink]="['/history-details', data.login.uuid]" style="font-weight: bold; color: rgb(232, 255, 238); text-decoration: underline; color: #388E3C; border-radius: 5px; ">Ver mas</a>
-                  </td>
-      
+              </thead>
+              <tbody class="custom-body">
+              <tr *ngFor="let data of basicTable.data">
+                      <td nzAlign="center">{{ data.gender }}</td>
+                      <td nzAlign="center">{{ data.gender }}</td>
+                      <td nzAlign="center">{{ data.gender }}</td>
+                      <td nzAlign="center">{{ data.gender }}</td>
+                      <td nzAlign="center">{{ data.gender }}</td>
+                      <td nzAlign="center">{{ data.login.uuid }}</td>
+                      <td nzAlign="center">
+                        <a [routerLink]="['/history-details', data.login.uuid]" style="font-weight: bold; color: rgb(232, 255, 238); text-decoration: underline; color: #388E3C; border-radius: 5px; ">Ver mas</a>
+                      </td>
               </tr>
-            </tbody>
+              </tbody>
           </nz-table>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { IConteos } from '../Interfaces/IConteos';
 import { RandomUserService } from '../services/history-list.service';
 
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { IDatosGenerales } from '@app/history-details/Interfaces/IDatosGenerales';
 
 @Component({
   selector: 'app-history-list',
@@ -10,45 +11,116 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
   styleUrls: ['./history-list.component.scss']
 })
 export class HistoryListComponent implements OnInit {
+  results = 11;
 
-  total = 1;
   listOfRandomUser: IConteos[] = [];
   loading = true;
-  pageSize = 10;
-  pageIndex = 1;
-  filterGender = [
-    { text: 'male', value: 'male' },
-    { text: 'female', value: 'female' }
+
+  listOfData: IDatosGenerales[] = [
+    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },
+    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '324',
+      total_huevos_intactos: 45
+    },    {
+      id: '1',
+      cepa: 'John Brown',
+      generacion: '32',
+      codigo_crianza: '3',
+      especie: 'Aegipty',
+      codigo_responsable: '33324',
+      total_huevos_intactos: 45
+    },
   ];
 
-  loadDataFromServer(
-    pageIndex: number,
-    pageSize: number,
-    sortField: string | null,
-    sortOrder: string | null,
-    filter: Array<{ key: string; value: string[] }>
-  ): void {
+  loadDataFromServer(results: number): void {
     this.loading = true;
-    this.randomUserService.getUsers(pageIndex, pageSize, sortField, sortOrder, filter).subscribe(data => {
+    this.randomUserService.getUsers( results).subscribe(data => {
       this.loading = false;
-      this.total = 200; // mock the total data here
       this.listOfRandomUser = data.results;
     });
-  }
-
-  onQueryParamsChange(params: NzTableQueryParams): void {
-    console.log(params);
-    const { pageSize, pageIndex, sort, filter } = params;
-    const currentSort = sort.find(item => item.value !== null);
-    const sortField = (currentSort && currentSort.key) || null;
-    const sortOrder = (currentSort && currentSort.value) || null;
-    this.loadDataFromServer(pageIndex, pageSize, sortField, sortOrder, filter);
   }
 
   constructor(private randomUserService: RandomUserService) { }
 
   ngOnInit(): void {
-    this.loadDataFromServer(this.pageIndex, this.pageSize, null, null, []);
+    this.loadDataFromServer(this.results);
   }
 
 }

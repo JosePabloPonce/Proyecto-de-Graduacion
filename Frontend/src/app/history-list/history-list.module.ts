@@ -17,7 +17,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     HistoryListRoutingModule,
     SharedModule,
     NzTableModule,
-    NzPaginationModule
+    NzPaginationModule,
+    
   ]
 })
 export class HistoryListModule { }

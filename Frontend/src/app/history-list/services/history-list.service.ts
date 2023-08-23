@@ -11,23 +11,10 @@ import { catchError } from 'rxjs/operators';
 export class RandomUserService {
   randomUserUrl = 'https://api.randomuser.me/';
 
-  getUsers(
-    pageIndex: number,
-    pageSize: number,
-    sortField: string | null,
-    sortOrder: string | null,
-    filters: Array<{ key: string; value: string[] }>
-  ): Observable<{ results: IConteos[] }> {
+  getUsers(results: number,): Observable<{ results: IConteos[] }> {
     let params = new HttpParams()
-      .append('page', `${pageIndex}`)
-      .append('results', `${pageSize}`)
-      .append('sortField', `${sortField}`)
-      .append('sortOrder', `${sortOrder}`);
-    filters.forEach(filter => {
-      filter.value.forEach(value => {
-        params = params.append(filter.key, value);
-      });
-    });
+      .append('results', `${results}`)
+
     return this.http
       .get<{ results: IConteos[] }>(`${this.randomUserUrl}`, { params })
       .pipe(catchError(() => of({ results: [] })));
