@@ -7,5 +7,6 @@ export const environment = {
     authDomain: 'gradproyect.firebaseapp.com',
     messagingSenderId: '59106365632',
   },
-  production: true
+  production: true,
+  baseUrl: 'https://backend-conteo.vercel.app/'
 };
