@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2  } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '@app/popup/popup.component';
+import { RoboflowService } from '../services/roboflow.service';
 
 @Component({
   selector: 'app-homepage',
@@ -13,15 +14,17 @@ export class HomepageComponent implements OnInit {
   assetPath2: string | undefined;
   assetPath3: string | undefined;
   assetPath4: string | undefined;
-  selectedFile: any;
+  selectedFiles: File[] = [];
 
   isDragging = false;
   showUploadProgress = false;
   uploadComplete = false;
 
 
+  processingBatch: number = 0;  
+  totalBatches: number = 0;  
 
-  constructor(private renderer: Renderer2, public dialog: MatDialog) { }
+  constructor(private renderer: Renderer2, public dialog: MatDialog, private roboflowService: RoboflowService) { }
 
   ngOnInit(): void {
     this.assetPath = `${document.baseURI}assets/huevos.png`;
@@ -30,6 +33,12 @@ export class HomepageComponent implements OnInit {
     this.assetPath4 = `${document.baseURI}assets/camara.png`;
 
   }
+
+// Función para calcular la altura del bounding box usando los puntos:
+calculateHeight(prediction: any): number {
+  return Math.abs(prediction.points[1].y - prediction.points[0].y);
+}
+
 
   // Función para controlar el evento 'dragover'
   onDragOver(event: DragEvent) {
@@ -43,10 +52,10 @@ export class HomepageComponent implements OnInit {
     this.isDragging = false;
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
-      this.selectedFile = files[0];
+      this.selectedFiles = Array.from(files); // <-- Cambio para manejar múltiples archivos
       this.showUploadProgress = true;
       this.uploadComplete = false; // Restablecer el estado de uploadComplete
-  
+    
       // Simulación de carga de imagen (reemplaza con tu lógica de carga real)
       setTimeout(() => {
         // Lógica de carga completa
@@ -56,11 +65,131 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  continuar(): void {
-    // Lógica para continuar después de la carga completa
-    // Llamamos a la función para abrir el popup
-    this.openPopup();
+  resizeImage(base64Str: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.src = base64Str;
+        img.onload = () => {
+            let canvas = document.createElement('canvas');
+            const MAX_WIDTH = 1500;
+            const MAX_HEIGHT = 1500;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            let ctx = canvas.getContext('2d');
+            ctx?.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 1.0));
+        };
+
+        img.onerror = (error) => {
+            reject(error);
+        };
+    });
+}
+
+base64ToFile(base64: string, filename: string): File {
+  const arrayBuffer = new Uint8Array(
+      atob(base64.split(',')[1])
+          .split('')
+          .map(char => char.charCodeAt(0))
+  );
+  return new File([arrayBuffer], filename, { type: 'image/jpeg' });
+}
+
+
+// Asumiendo que this.results es un array donde almacenarás los resultados.
+results: any[] = [];
+
+continuar(): void {
+  this.results = []
+
+  if (!this.selectedFiles || this.selectedFiles.length === 0) {
+    console.error('No se seleccionó ningún archivo.');
+    return;
   }
+
+  const BATCH_SIZE = 10;
+
+  // Esta función procesa un lote y devuelve una promesa
+  const processBatch = (filesBatch: File[]): Promise<any[]> => {
+    const batchPromises = [];
+
+    for (const file of filesBatch) {
+      const filePromise = this.getBase64FromFile(file)
+        .then((base64image: string) => this.resizeImage(base64image))
+        .then((resizedImage: string) => {
+          const resizedFile = this.base64ToFile(resizedImage, file.name);
+          return this.roboflowService.analyzeImage(resizedFile).toPromise();
+        });
+
+      batchPromises.push(filePromise);
+    }
+
+    return Promise.all(batchPromises);
+  }
+
+  // Esta función procesa todos los lotes de manera secuencial
+  const processAllBatches = async (allFiles: File[]) => {
+    const totalBatches = Math.ceil(allFiles.length / BATCH_SIZE);
+    this.totalBatches = totalBatches;  // Establecer el total de lotes
+
+    for (let i = 0; i < totalBatches; i++) {
+      const startIdx = i * BATCH_SIZE;
+      const endIdx = startIdx + BATCH_SIZE;
+      this.processingBatch = i + 1;  // Actualizar el lote actual
+
+      const currentBatch = allFiles.slice(startIdx, endIdx);
+
+      // Espera a que el lote actual termine antes de continuar al siguiente
+      const batchResults = await processBatch(currentBatch);
+      for (const result of batchResults) {
+        if (result && result.predictions && result.predictions.length > 0) {
+          this.results.push(...result.predictions);
+        } else {
+          console.warn('No se detectaron huevecillos en una de las imágenes.');
+        }
+      }
+    }
+    this.processingBatch = 0;  // Resetear cuando termina el proceso
+
+    console.log("Resultados de todas las imágenes:", this.results);
+
+    if (this.results.length > 0) {
+      this.openPopup();
+    } else {
+      alert('No se detectaron huevecillos en ninguna de las imágenes.');
+    }
+  }
+
+  processAllBatches(this.selectedFiles).catch((error) => {
+    console.error('Error durante el procesamiento:', error);
+    alert('Hubo un error durante el procesamiento de las imágenes.');
+  });
+}
+
+
+getBase64FromFile(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+  });
+}
 
 
 
@@ -79,23 +208,24 @@ export class HomepageComponent implements OnInit {
   abrirExploradorArchivos() {
     const fileInput = document.createElement('input');
     fileInput.type = 'file';
+    fileInput.multiple = true; //multiples archivos
     fileInput.accept = 'image/*';
     fileInput.style.display = 'none';
-
+  
     fileInput.addEventListener('change', (event: any) => {
-      this.selectedFile = event.target.files[0];
-      // Aquí puedes hacer algo con la imagen seleccionada, como subirla al servidor
+      this.selectedFiles = Array.from(event.target.files); 
+      // subir imagenes ---
       this.showUploadProgress = true;
       this.uploadComplete = false; // Restablecer el estado de uploadComplete
-  
-      // Simulación de carga de imagen (reemplaza con tu lógica de carga real)
+    
+      // Simulación de carga de imagen 
       setTimeout(() => {
         // Lógica de carga completa
         this.showUploadProgress = false;
         this.uploadComplete = true;
       }, 2000);
     });
-
+  
     document.body.appendChild(fileInput);
     fileInput.click();
   }

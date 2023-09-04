@@ -5,7 +5,7 @@
 
 .huevos{
     width: auto;
-    height: 200px;
+    height: 150px;
     object-fit: cover;
 }
 
@@ -16,9 +16,19 @@
 
 .camara{
  height: auto; 
- width: 10%;
+ width: 8%;
 
 }
+
+.image-upload-list {
+  max-height: 100px;  // Ajusta esta altura según tus necesidades
+  overflow-y: auto;  // Habilita el desplazamiento vertical
+  width: 100%;       // Asegúrate de que ocupe todo el espacio disponible
+  border: 1px solid #ccc;  // Opcional: un borde para que sea visible el área del desplazamiento
+  padding: 10px;     // Espacio interno
+  box-sizing: border-box;  // Asegura que el padding y el borde no aumenten el tamaño del div
+}
+
 .boton-analizar{
     border-radius: 20px;
     background: #DDEEDF;
