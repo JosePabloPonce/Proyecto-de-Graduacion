@@ -7,6 +7,8 @@ import { IDatosGenerales } from '@app/history-details/Interfaces/IDatosGenerales
 import { IConteoDeHuevecillos } from '@app/history-details/Interfaces/IConteoDeHuevecillos';
 import { format, isValid } from 'date-fns';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
+import { PopupService } from './services/popup.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 
 @Component({
@@ -116,16 +118,35 @@ export class PopupComponent implements OnInit {
   }
   }
 } 
-  constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService) {}
+
+  guardarDatos(): void {
+    this.popupservice.saveData(this.listOfData, this.listOfData2).subscribe({
+      next: (response) => {
+        // Mostrar mensaje de éxito
+        this.message.create('success', 'Datos guardados con éxito');
+
+        // Cerrar el diálogo
+        this.dialogRef.close();
+      },
+      error: (error) => {
+        // Mostrar mensaje de error
+        this.message.create('error', 'Error guardando datos',);
+
+        // Cerrar el diálogo
+        this.dialogRef.close();
+      }
+    });
+  }
+  constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupService, private message: NzMessageService) {}
 
   ngOnInit(): void {
   
     const updatedData = {
-      id: ' ', // Esto es solo un ejemplo, puedes cambiarlo según lo necesites
+      id: ' ', 
       codigo_sustrato: ' ',
       fecha_colocacion_sustrato: ' ',
       fecha_retiro_sustrato: ' ',
-      huevos_intactos: this.data.huevosViables, // Suponiendo que huevosViables se relaciona con huevos_intactos
+      huevos_intactos: this.data.huevosViables, 
       huevos_eclosionados: this.data.huevosEclosionados,
       huevos_en_canoa: this.data.huevosEnCanoa,
       total_huevos: this.data.huevosEnCanoa + this.data.huevosEclosionados + this.data.huevosViables,

@@ -23,7 +23,12 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
 
+const ngZorroConfig: NzConfig = {
+  message: { nzTop: '55px' },
+};
 registerLocaleData(es);
 
 @NgModule({
@@ -44,10 +49,11 @@ registerLocaleData(es);
     NzPaginationModule,
     FormsModule,
     NzPopconfirmModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzMessageModule
 
   ],
-  providers: [{ provide: NZ_I18N, useValue: es_ES }],
+  providers: [{ provide: NZ_I18N, useValue: es_ES },  { provide: NZ_CONFIG, useValue: ngZorroConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

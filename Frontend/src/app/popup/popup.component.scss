@@ -25,11 +25,15 @@
             border: none;
             border-radius: 5px;
             font-weight: bold;
-            cursor: pointer;
             z-index: 100000000000;
         }
     }
   }
+
+  .ng-zorro-message {
+    z-index: 2000;  /* o cualquier número suficientemente alto */
+}
+
   .custom-header {
     background-color: #388E3C; /* Cambia este color al que desees */
   }
