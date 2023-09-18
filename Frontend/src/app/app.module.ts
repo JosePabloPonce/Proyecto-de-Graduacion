@@ -18,8 +18,13 @@ import { PopupComponent } from './popup/popup.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { FormsModule } from '@angular/forms';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
 
-
+registerLocaleData(es);
 
 @NgModule({
   declarations: [
@@ -36,7 +41,11 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     provideAuth(()=> getAuth()),
     SharedModule,
     NzTableModule,
-    NzPaginationModule
+    NzPaginationModule,
+    FormsModule,
+    NzPopconfirmModule,
+    NzDatePickerModule
+
   ],
   providers: [{ provide: NZ_I18N, useValue: es_ES }],
   bootstrap: [AppComponent]

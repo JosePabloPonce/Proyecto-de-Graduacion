@@ -16,6 +16,10 @@ export class HomepageComponent implements OnInit {
   assetPath4: string | undefined;
   selectedFiles: File[] = [];
 
+  huevosEnCanoa = 0;
+  huevosViables = 0;
+  huevosEclosionados = 0;
+   
   isDragging = false;
   showUploadProgress = false;
   uploadComplete = false;
@@ -33,6 +37,24 @@ export class HomepageComponent implements OnInit {
     this.assetPath4 = `${document.baseURI}assets/camara.png`;
 
   }
+
+  
+  processData(data: any[]) {
+    for (let item of data) {
+      switch (item.class) {
+        case 'huevos en canoa':
+          this.huevosEnCanoa++;
+          break;
+        case 'huevos viables':
+          this.huevosViables++;
+          break;
+        case 'huevos eclosionados':
+          this.huevosEclosionados++;
+          break;
+      }
+    }
+  }
+
 
 // Función para calcular la altura del bounding box usando los puntos:
 calculateHeight(prediction: any): number {
@@ -167,6 +189,8 @@ continuar(): void {
     this.processingBatch = 0;  // Resetear cuando termina el proceso
 
     console.log("Resultados de todas las imágenes:", this.results);
+    this.processData(this.results)
+    console.log(this.huevosEclosionados, this.huevosEnCanoa, this.huevosViables)
 
     if (this.results.length > 0) {
       this.openPopup();
@@ -196,7 +220,12 @@ getBase64FromFile(file: File): Promise<string> {
   openPopup(): void {
     const dialogRef = this.dialog.open(PopupComponent,{
       panelClass: 'modal-container',
-      disableClose: true
+      disableClose: true,
+      data: {
+        huevosEnCanoa: this.huevosEnCanoa,
+        huevosViables: this.huevosViables,
+        huevosEclosionados: this.huevosEclosionados
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

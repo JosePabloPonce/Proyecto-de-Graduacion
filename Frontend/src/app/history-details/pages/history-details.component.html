@@ -4,7 +4,7 @@
         <div  style="height: 100%;">
             
             <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Datos Generales </h1>
-            <nz-table #editRowTable  #basicTable  nzTableLayout="fixed" [nzScroll]="{ x: '1500px' }" [nzData]="listOfData">
+            <nz-table #editRowTable  #basicTable  nzTableLayout="fixed" [nzScroll]="{ x: '1500px' }" [nzData]="listOfData" [nzShowPagination]="false">
                 <thead>
                 <tr class="custom-header">
                     <th nzAlign="center">Cepa</th>
@@ -12,7 +12,7 @@
                     <th nzAlign="center">Código Crianza</th>
                     <th nzAlign="center">Especie</th>
                     <th nzAlign="center">Código Responsable</th>
-                    <th nzAlign="center">Total Huevos Intactos</th>
+                    <th nzAlign="center">Total Huevos Viables</th>
                     <th nzAlign="center">Acción</th>
                 </tr>
                 </thead>
@@ -45,6 +45,8 @@
                 </tr>
                 </tbody>
             </nz-table>
+
+            <br/>
 
             <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Conteo de Huevecillos </h1>
             
@@ -81,8 +83,8 @@
                     </ng-container>
                     <ng-template #editTemplateHuevecillos>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.codigo_sustrato" /> </td>
-                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.fecha_colocacion_sustrato" /> </td>
-                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.fecha_retiro_sustrato" /> </td>
+                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_colocacion_sustrato" (ngModelChange)="onDateChange(data.id, $event, 'fecha_colocacion_sustrato')"></nz-date-picker>  </td>
+                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_retiro_sustrato" (ngModelChange)="onDateChange(data.id, $event, 'fecha_retiro_sustrato')"></nz-date-picker>  </td>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_intactos" /> </td>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_eclosionados" /> </td>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_en_canoa" /> </td>

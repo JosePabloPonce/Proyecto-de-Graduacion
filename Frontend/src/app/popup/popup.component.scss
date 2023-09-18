@@ -43,3 +43,15 @@
 .custom-body {
     background-color: #DDEEDF;
   }   
+
+  /* Estilo para el contenedor principal del pop-up */
+.row.w-100 {
+  z-index: 1000; /* Esto coloca el pop-up por encima de otros contenidos en tu página */
+  position: relative; /* Es importante establecer un position diferente a 'static' para que z-index funcione */
+}
+
+/* Estilo para las tablas para asegurarse de que estén por encima de otros elementos dentro del pop-up */
+.table-container nz-table {
+  z-index: 1001; /* Esto coloca las tablas por encima de otros contenidos en tu pop-up */
+  position: relative; /* De nuevo, es importante establecer un position diferente a 'static' */
+}

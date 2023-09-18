@@ -8,6 +8,11 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { FormsModule } from '@angular/forms';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(es);
 
 
 @NgModule({
@@ -21,7 +26,8 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzTableModule,
     NzPaginationModule,
     FormsModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzDatePickerModule
   ]
 })
 export class HistoryDetailsModule { }

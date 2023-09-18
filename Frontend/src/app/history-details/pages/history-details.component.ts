@@ -3,6 +3,8 @@ import { IDatosGenerales } from '../Interfaces/IDatosGenerales';
 import { IConteoDeHuevecillos } from '../Interfaces/IConteoDeHuevecillos';
 
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzI18nService } from 'ng-zorro-antd/i18n';
+import { format, isValid } from 'date-fns';
 
 @Component({
   selector: 'app-history-details',
@@ -11,6 +13,7 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 })
 export class HistoryDetailsComponent implements OnInit {
 
+  date = null;
 
   listOfData: IDatosGenerales[] = [
     {
@@ -21,87 +24,7 @@ export class HistoryDetailsComponent implements OnInit {
       especie: 'Aegipty',
       codigo_responsable: '324',
       total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    },
+    }, 
   ];
 
 
@@ -119,7 +42,7 @@ export class HistoryDetailsComponent implements OnInit {
       responsable_conteo_huevos: '32',
     },
     {
-      id: '1',
+      id: '2',
       codigo_sustrato: 'A',
       fecha_colocacion_sustrato: '2019-01-16',
       fecha_retiro_sustrato: '2019-01-16',
@@ -130,106 +53,7 @@ export class HistoryDetailsComponent implements OnInit {
       generacion_filial: '32',
       responsable_conteo_huevos: '32',
     },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '1',
+      id: '3',
       codigo_sustrato: 'A',
       fecha_colocacion_sustrato: '2019-01-16',
       fecha_retiro_sustrato: '2019-01-16',
@@ -253,6 +77,26 @@ export class HistoryDetailsComponent implements OnInit {
     }
   }
 
+  onDateChange(id: string, newDateValue: Date, variable: String): void {
+    if(variable === 'fecha_colocacion_sustrato'){
+      if (newDateValue && isValid(newDateValue)) {
+          const formattedDate = format(newDateValue, 'yyyy-MM-dd');
+          this.editCache2[id].data.fecha_colocacion_sustrato = formattedDate;
+      } else {
+          const currentDate = new Date();
+          this.editCache2[id].data.fecha_colocacion_sustrato = format(currentDate, 'yyyy-MM-dd');
+      }
+  } else if(variable === 'fecha_retiro_sustrato'){
+    if (newDateValue && isValid(newDateValue)) {
+      const formattedDate = format(newDateValue, 'yyyy-MM-dd');
+      this.editCache2[id].data.fecha_retiro_sustrato = formattedDate;
+  } else {
+      const currentDate = new Date();
+      this.editCache2[id].data.fecha_retiro_sustrato = format(currentDate, 'yyyy-MM-dd');
+  }
+  }
+}
+
   cancelEdit(id: string,  tabla: string): void {
     if(tabla === 'general'){
     const index = this.listOfData.findIndex(item => item.id === id);
@@ -262,8 +106,8 @@ export class HistoryDetailsComponent implements OnInit {
     };
   } else if (tabla ==='conteo') {
     const index = this.listOfData2.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
+    this.editCache2[id] = {
+      data: { ...this.listOfData2[index] },
       edit: false
     };
   }
@@ -279,6 +123,8 @@ export class HistoryDetailsComponent implements OnInit {
       Object.assign(this.listOfData2[index], this.editCache2[id].data);
       this.editCache2[id].edit = false;
     }
+
+    console.log(this.listOfData2)
   }
 
 
@@ -300,7 +146,7 @@ export class HistoryDetailsComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private i18n: NzI18nService) { }
 
   ngOnInit(): void {
     this.updateEditCache();
