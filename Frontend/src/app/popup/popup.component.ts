@@ -19,6 +19,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 export class PopupComponent implements OnInit {
 
+  
   listOfData: IDatosGenerales[] = [
     {
       id: ' ',
@@ -140,12 +141,13 @@ export class PopupComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupService, private message: NzMessageService) {}
 
   ngOnInit(): void {
-  
+    
+    const currentDate = new Date();
     const updatedData = {
       id: ' ', 
       codigo_sustrato: ' ',
-      fecha_colocacion_sustrato: ' ',
-      fecha_retiro_sustrato: ' ',
+      fecha_colocacion_sustrato:  format(currentDate, 'yyyy-MM-dd'),
+      fecha_retiro_sustrato: format(currentDate, 'yyyy-MM-dd'),
       huevos_intactos: this.data.huevosViables, 
       huevos_eclosionados: this.data.huevosEclosionados,
       huevos_en_canoa: this.data.huevosEnCanoa,
