@@ -121,6 +121,8 @@ export class PopupComponent implements OnInit {
 } 
 
   guardarDatos(): void {
+    console.log('DATOS', this.listOfData);
+    console.log('CONTEO', this.listOfData2);
     this.popupservice.saveData(this.listOfData, this.listOfData2).subscribe({
       next: (response) => {
         // Mostrar mensaje de éxito
@@ -144,7 +146,8 @@ export class PopupComponent implements OnInit {
     
     const currentDate = new Date();
     const updatedData = {
-      id: ' ', 
+      id: '',
+      id_user: 0, 
       codigo_sustrato: ' ',
       fecha_colocacion_sustrato:  format(currentDate, 'yyyy-MM-dd'),
       fecha_retiro_sustrato: format(currentDate, 'yyyy-MM-dd'),

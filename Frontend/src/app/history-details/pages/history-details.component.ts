@@ -5,7 +5,7 @@ import { IConteoDeHuevecillos } from '../Interfaces/IConteoDeHuevecillos';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { format, isValid } from 'date-fns';
-
+import { HistoryDetailsService } from '../services/history-details.service';
 @Component({
   selector: 'app-history-details',
   templateUrl: './history-details.component.html',
@@ -15,56 +15,10 @@ export class HistoryDetailsComponent implements OnInit {
 
   date = null;
 
-  listOfData: IDatosGenerales[] = [
-    {
-      id: '1',
-      cepa: 'John Brown',
-      generacion: '32',
-      codigo_crianza: '3',
-      especie: 'Aegipty',
-      codigo_responsable: '324',
-      total_huevos_intactos: 45
-    }, 
-  ];
+  listOfData: IDatosGenerales[] = [];
 
 
-  listOfData2: IConteoDeHuevecillos[] = [
-    {
-      id: '1',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },
-    {
-      id: '2',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },    {
-      id: '3',
-      codigo_sustrato: 'A',
-      fecha_colocacion_sustrato: '2019-01-16',
-      fecha_retiro_sustrato: '2019-01-16',
-      huevos_intactos: 4,
-      huevos_eclosionados: 6,
-      huevos_en_canoa: 45,
-      total_huevos: 45,
-      generacion_filial: '32',
-      responsable_conteo_huevos: '32',
-    },
-  ];
+  listOfData2: IConteoDeHuevecillos[] = [];
 
   editCache: { [key: string]: { edit: boolean; data: IDatosGenerales } } = {};
   editCache2: { [key: string]: { edit: boolean; data: IConteoDeHuevecillos } } = {};
@@ -145,10 +99,26 @@ export class HistoryDetailsComponent implements OnInit {
 
   }
 
+  getDatos(): void {
+    this.service.getDatos().subscribe(data => {
+      console.log('DATOS:', data)
+      this.listOfData = data
+    })
+  }
 
-  constructor(private i18n: NzI18nService) { }
+  getConteos(): void {
+    this.service.getConteos().subscribe(data => {
+      console.log('CONTEOS:', data)
+      this.listOfData2 = data
+    })
+  }
+
+
+  constructor(private i18n: NzI18nService, private service: HistoryDetailsService) { }
 
   ngOnInit(): void {
     this.updateEditCache();
+    this.getDatos();
+    this.getConteos();
   }
 }

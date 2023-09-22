@@ -5,5 +5,5 @@ export interface IDatosGenerales {
     codigo_crianza: string;
     especie: string;
     codigo_responsable: string;
-    total_huevos_intactos: number;
+    total_huevos_intactos?: number;
 }

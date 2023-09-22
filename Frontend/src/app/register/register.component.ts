@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '@app/services/user.services';
+import { environment } from '@environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { Register } from './register.interface';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient,
   ) {
     this.formReg = new FormGroup({
       email: new FormControl(),
@@ -31,7 +35,15 @@ export class RegisterComponent implements OnInit {
     this.userService.register(this.formReg.value)
       .then(response => {
         console.log(response);
-        this.router.navigate(['/login']);
+        const newUser: Register = {
+          name: '',
+          email: this.formReg.value.email,
+          firebase_id: ''
+      }
+        console.log(newUser)
+        this.userService.registerUser(newUser).subscribe(() => {
+          this.router.navigate(['/login']);
+        });
       })
       .catch(error => console.log(error));
   }

@@ -9,5 +9,5 @@ export interface IConteoDeHuevecillos {
     total_huevos: number;
     generacion_filial: string;
     responsable_conteo_huevos: string;
-
+    id_user: number;
 }
