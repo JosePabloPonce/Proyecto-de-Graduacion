@@ -1,13 +1,14 @@
 export interface IConteoDeHuevecillos {
     id: string;
     codigo_sustrato: string;
-    fecha_colocacion_sustrato: string;
-    fecha_retiro_sustrato: string;
+    fecha_colocacion: string;
+    fecha_retiro: string;
     huevos_intactos: number;
     huevos_eclosionados: number;
-    huevos_en_canoa: number;
+    huevos_canoa: number;
     total_huevos: number;
-    generacion_filial: string;
-    responsable_conteo_huevos: string;
+    generacion: string;
+    responsable: string;
     id_user: number;
+    id_datos: number;
 }

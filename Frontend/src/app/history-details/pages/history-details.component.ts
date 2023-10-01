@@ -6,6 +6,8 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { format, isValid } from 'date-fns';
 import { HistoryDetailsService } from '../services/history-details.service';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-history-details',
   templateUrl: './history-details.component.html',
@@ -23,6 +25,8 @@ export class HistoryDetailsComponent implements OnInit {
   editCache: { [key: string]: { edit: boolean; data: IDatosGenerales } } = {};
   editCache2: { [key: string]: { edit: boolean; data: IConteoDeHuevecillos } } = {};
 
+  idDatos: number = 0;
+
   startEdit(id: string, tabla:string): void {
     if(tabla === 'general'){
       this.editCache[id].edit = true;      
@@ -32,21 +36,21 @@ export class HistoryDetailsComponent implements OnInit {
   }
 
   onDateChange(id: string, newDateValue: Date, variable: String): void {
-    if(variable === 'fecha_colocacion_sustrato'){
+    if(variable === 'fecha_colocacion'){
       if (newDateValue && isValid(newDateValue)) {
           const formattedDate = format(newDateValue, 'yyyy-MM-dd');
-          this.editCache2[id].data.fecha_colocacion_sustrato = formattedDate;
+          this.editCache2[id].data.fecha_colocacion = formattedDate;
       } else {
           const currentDate = new Date();
-          this.editCache2[id].data.fecha_colocacion_sustrato = format(currentDate, 'yyyy-MM-dd');
+          this.editCache2[id].data.fecha_colocacion = format(currentDate, 'yyyy-MM-dd');
       }
-  } else if(variable === 'fecha_retiro_sustrato'){
+  } else if(variable === 'fecha_retiro'){
     if (newDateValue && isValid(newDateValue)) {
       const formattedDate = format(newDateValue, 'yyyy-MM-dd');
-      this.editCache2[id].data.fecha_retiro_sustrato = formattedDate;
+      this.editCache2[id].data.fecha_retiro = formattedDate;
   } else {
       const currentDate = new Date();
-      this.editCache2[id].data.fecha_retiro_sustrato = format(currentDate, 'yyyy-MM-dd');
+      this.editCache2[id].data.fecha_retiro = format(currentDate, 'yyyy-MM-dd');
   }
   }
 }
@@ -100,24 +104,30 @@ export class HistoryDetailsComponent implements OnInit {
   }
 
   getDatos(): void {
-    this.service.getDatos().subscribe(data => {
+    this.service.getDatos(this.idDatos).subscribe(data => {
       console.log('DATOS:', data)
       this.listOfData = data
     })
   }
 
   getConteos(): void {
-    this.service.getConteos().subscribe(data => {
+    this.service.getConteos(this.idDatos).subscribe(data => {
       console.log('CONTEOS:', data)
       this.listOfData2 = data
+      console.log('LISTA CONTEO:', this.listOfData2)
     })
   }
 
 
-  constructor(private i18n: NzI18nService, private service: HistoryDetailsService) { }
+  constructor(private i18n: NzI18nService, private service: HistoryDetailsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.updateEditCache();
+    this.route.params.subscribe(params => {
+      const id = +params['id']; // El '+' convierte el id de string a number
+      console.log(id); // Aquí tienes el id que pasaste con routerLink
+      this.idDatos = id;
+    });
+    //this.updateEditCache();
     this.getDatos();
     this.getConteos();
   }

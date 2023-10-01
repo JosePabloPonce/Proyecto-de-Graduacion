@@ -13,11 +13,11 @@ export class HistoryDetailsService {
 
   constructor(private http: HttpClient) { }
 
-  getDatos(){
-    return this.http.get<IDatosGenerales[]>(`${environment.baseUrl}datos`);
+  getDatos(id_datos:any){
+    return this.http.get<IDatosGenerales[]>(`${environment.baseUrl}datos/${id_datos}`);
   }
 
-  getConteos(){
-    return this.http.get<IConteoDeHuevecillos[]>(`${environment.baseUrl}conteo`);
+  getConteos(id_datos:any){
+    return this.http.get<IConteoDeHuevecillos[]>(`${environment.baseUrl}conteo/${id_datos}`);
   }
 }

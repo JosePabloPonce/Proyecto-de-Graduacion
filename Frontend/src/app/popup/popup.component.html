@@ -65,26 +65,26 @@
                 <ng-container *ngIf="!editCache2[data.id].edit; else editTemplateHuevecillos">
 
                     <td nzAlign="center">{{ data.codigo_sustrato }}</td>
-                    <td nzAlign="center">{{ data.fecha_colocacion_sustrato }}</td>
-                    <td nzAlign="center">{{ data.fecha_retiro_sustrato }}</td>
+                    <td nzAlign="center">{{ data.fecha_colocacion }}</td>
+                    <td nzAlign="center">{{ data.fecha_retiro }}</td>
                     <td nzAlign="center">{{ data.huevos_intactos }}</td>
                     <td nzAlign="center">{{ data.huevos_eclosionados }}</td>
-                    <td nzAlign="center">{{ data.huevos_en_canoa }}</td>
+                    <td nzAlign="center">{{ data.huevos_canoa }}</td>
                     <td nzAlign="center">{{ data.total_huevos }}</td>
-                    <td nzAlign="center">{{ data.generacion_filial }}</td>
-                    <td nzAlign="center">{{ data.responsable_conteo_huevos }}</td>
+                    <td nzAlign="center">{{ data.generacion }}</td>
+                    <td nzAlign="center">{{ data.responsable }}</td>
                     <td style="font-weight: bold; color: #388E3C;" nzAlign="center"><a (click)="startEdit(data.id, 'conteo')">Editar</a></td>
                 </ng-container>
                 <ng-template #editTemplateHuevecillos>
                     <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.codigo_sustrato" /> </td>
-                    <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_colocacion_sustrato" (ngModelChange)="onDateChange(data.id, $event, 'fecha_colocacion_sustrato')"></nz-date-picker>  </td>
-                    <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_retiro_sustrato" (ngModelChange)="onDateChange(data.id, $event, 'fecha_retiro_sustrato')"></nz-date-picker>  </td>
+                    <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_colocacion" (ngModelChange)="onDateChange(data.id, $event, 'fecha_colocacion')"></nz-date-picker>  </td>
+                    <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_retiro" (ngModelChange)="onDateChange(data.id, $event, 'fecha_retiro')"></nz-date-picker>  </td>
                     <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_intactos" /> </td>
                     <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_eclosionados" /> </td>
-                    <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_en_canoa" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_canoa" /> </td>
                     <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.total_huevos" /> </td>
-                    <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.generacion_filial" /> </td>
-                    <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.responsable_conteo_huevos" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.generacion" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.responsable" /> </td>
                     <td  nzAlign="center" >
                         <a  style="margin-right: 10px; font-weight: bold; color:#388E3C;"  (click)="saveEdit(data.id, 'conteo')"> Guardar</a>
                         <a  style="font-weight: bold; color: #388E3C;" nz-popconfirm nzPopconfirmTitle="Seguro?" (nzOnConfirm)="cancelEdit(data.id, 'conteo')">Cancelar</a>

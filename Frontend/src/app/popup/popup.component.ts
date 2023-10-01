@@ -93,7 +93,7 @@ export class PopupComponent implements OnInit {
   }
 
   updateHuevos() {
-    this.listOfData2[0].huevos_en_canoa = this.data.huevosEnCanoa;
+    this.listOfData2[0].huevos_canoa = this.data.huevosEnCanoa;
     this.listOfData2[0].huevos_eclosionados = this.data.huevosEclosionados;
     this.listOfData2[0].huevos_intactos = this.data.huevosViables;
 
@@ -101,21 +101,21 @@ export class PopupComponent implements OnInit {
 
 
   onDateChange(id: string, newDateValue: Date, variable: String): void {
-    if(variable === 'fecha_colocacion_sustrato'){
+    if(variable === 'fecha_colocacion'){
       if (newDateValue && isValid(newDateValue)) {
           const formattedDate = format(newDateValue, 'yyyy-MM-dd');
-          this.editCache2[id].data.fecha_colocacion_sustrato = formattedDate;
+          this.editCache2[id].data.fecha_colocacion = formattedDate;
       } else {
           const currentDate = new Date();
-          this.editCache2[id].data.fecha_colocacion_sustrato = format(currentDate, 'yyyy-MM-dd');
+          this.editCache2[id].data.fecha_colocacion = format(currentDate, 'yyyy-MM-dd');
       }
-  } else if(variable === 'fecha_retiro_sustrato'){
+  } else if(variable === 'fecha_retiro'){
     if (newDateValue && isValid(newDateValue)) {
       const formattedDate = format(newDateValue, 'yyyy-MM-dd');
-      this.editCache2[id].data.fecha_retiro_sustrato = formattedDate;
+      this.editCache2[id].data.fecha_retiro = formattedDate;
   } else {
       const currentDate = new Date();
-      this.editCache2[id].data.fecha_retiro_sustrato = format(currentDate, 'yyyy-MM-dd');
+      this.editCache2[id].data.fecha_retiro = format(currentDate, 'yyyy-MM-dd');
   }
   }
 } 
@@ -149,14 +149,15 @@ export class PopupComponent implements OnInit {
       id: '',
       id_user: 0, 
       codigo_sustrato: ' ',
-      fecha_colocacion_sustrato:  format(currentDate, 'yyyy-MM-dd'),
-      fecha_retiro_sustrato: format(currentDate, 'yyyy-MM-dd'),
+      fecha_colocacion:  format(currentDate, 'yyyy-MM-dd'),
+      fecha_retiro: format(currentDate, 'yyyy-MM-dd'),
       huevos_intactos: this.data.huevosViables, 
       huevos_eclosionados: this.data.huevosEclosionados,
-      huevos_en_canoa: this.data.huevosEnCanoa,
+      huevos_canoa: this.data.huevosEnCanoa,
       total_huevos: this.data.huevosEnCanoa + this.data.huevosEclosionados + this.data.huevosViables,
-      generacion_filial: ' ',
-      responsable_conteo_huevos: ' ',
+      generacion: ' ',
+      responsable: ' ',
+      id_datos: 0
     };
     this.listOfData2.push(updatedData);
     this.updateEditCache();
