@@ -22,12 +22,12 @@ export class PopupComponent implements OnInit {
   
   listOfData: IDatosGenerales[] = [
     {
-      id: ' ',
-      cepa: ' ',
-      generacion: ' ',
-      codigo_crianza: ' ',
-      especie: ' ',
-      codigo_responsable: ' ',
+      id: '',
+      cepa: '',
+      generacion: '',
+      codigo_crianza: '',
+      especie: '',
+      codigo_responsable: '',
       total_huevos_intactos: 0
     },  
   ];

@@ -79,8 +79,8 @@
                     </ng-container>
                     <ng-template #editTemplateHuevecillos>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.codigo_sustrato" /> </td>
-                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_colocacion" (ngModelChange)="onDateChange(data.id, $event, 'fecha_colocacion_sustrato')"></nz-date-picker>  </td>
-                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_retiro" (ngModelChange)="onDateChange(data.id, $event, 'fecha_retiro_sustrato')"></nz-date-picker>  </td>
+                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_colocacion" (ngModelChange)="onDateChange(data.id, $event, 'fecha_colocacion')"></nz-date-picker>  </td>
+                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_retiro" (ngModelChange)="onDateChange(data.id, $event, 'fecha_retiro')"></nz-date-picker>  </td>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_intactos" /> </td>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_eclosionados" /> </td>
                         <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_canoa" /> </td>

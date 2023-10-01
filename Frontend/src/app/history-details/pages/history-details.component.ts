@@ -27,6 +27,8 @@ export class HistoryDetailsComponent implements OnInit {
 
   idDatos: number = 0;
 
+  loading = true;
+  
   startEdit(id: string, tabla:string): void {
     if(tabla === 'general'){
       this.editCache[id].edit = true;      
@@ -107,14 +109,20 @@ export class HistoryDetailsComponent implements OnInit {
     this.service.getDatos(this.idDatos).subscribe(data => {
       console.log('DATOS:', data)
       this.listOfData = data
+      console.log('CACHE 1:', this.editCache)
+      this.updateEditCache();
     })
   }
 
   getConteos(): void {
+    this.loading = true;
     this.service.getConteos(this.idDatos).subscribe(data => {
       console.log('CONTEOS:', data)
       this.listOfData2 = data
       console.log('LISTA CONTEO:', this.listOfData2)
+      console.log('CACHE 2:', this.editCache2)
+      this.updateEditCache();
+      this.loading = false;
     })
   }
 
@@ -127,8 +135,8 @@ export class HistoryDetailsComponent implements OnInit {
       console.log(id); // Aquí tienes el id que pasaste con routerLink
       this.idDatos = id;
     });
+    
     this.getDatos();
     this.getConteos();
-    this.updateEditCache();
   }
 }
