@@ -127,8 +127,8 @@ export class HistoryDetailsComponent implements OnInit {
       console.log(id); // Aquí tienes el id que pasaste con routerLink
       this.idDatos = id;
     });
-    this.updateEditCache();
     this.getDatos();
     this.getConteos();
+    this.updateEditCache();
   }
 }
