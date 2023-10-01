@@ -28,7 +28,8 @@ export class HistoryDetailsComponent implements OnInit {
   idDatos: number = 0;
 
   loading = true;
-  
+  loading2 = true;
+
   startEdit(id: string, tabla:string): void {
     if(tabla === 'general'){
       this.editCache[id].edit = true;      
@@ -106,11 +107,13 @@ export class HistoryDetailsComponent implements OnInit {
   }
 
   getDatos(): void {
+    this.loading2 = true;
     this.service.getDatos(this.idDatos).subscribe(data => {
       console.log('DATOS:', data)
       this.listOfData = data
       console.log('CACHE 1:', this.editCache)
       this.updateEditCache();
+      this.loading2 = false;
     })
   }
 

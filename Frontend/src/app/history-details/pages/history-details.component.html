@@ -4,7 +4,7 @@
         <div  style="height: 100%;">
             
             <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Datos Generales </h1>
-            <nz-table #editRowTable  #basicTable  nzTableLayout="fixed" [nzScroll]="{ x: '1500px' }" [nzData]="listOfData" [nzShowPagination]="false">
+            <nz-table #editRowTable  #basicTable  nzTableLayout="fixed" [nzScroll]="{ x: '1500px' }" [nzData]="listOfData" [nzShowPagination]="false" [nzLoading]="loading2">
                 <thead>
                 <tr class="custom-header">
                     <th nzAlign="center">Cepa</th>
@@ -47,7 +47,7 @@
 
             <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Conteo de Huevecillos </h1>
             
-            <nz-table #basicTable2 nzShowSizeChanger nzTableLayout="fixed" [nzScroll]="{ x: '1700px' }" [nzData]="listOfData2">
+            <nz-table #basicTable2 nzShowSizeChanger nzTableLayout="fixed" [nzScroll]="{ x: '1700px' }" [nzData]="listOfData2" [nzLoading]="loading">
                 <thead>
                 <tr class="custom-header">
                     <th nzAlign="center">Código Sustrato</th>
