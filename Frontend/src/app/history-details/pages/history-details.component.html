@@ -18,6 +18,7 @@
                 </thead>
                 <tbody class="custom-body">
                 <tr *ngFor="let data of basicTable.data">
+                    <ng-container *ngIf="!editCache[data.id].edit; else editTemplateGeneral">
                         <td nzAlign="center">{{ data.cepa }}</td>
                         <td nzAlign="center">{{ data.generacion }}</td>
                         <td nzAlign="center">{{ data.codigo_crianza }}</td>
@@ -25,7 +26,19 @@
                         <td nzAlign="center">{{ data.codigo_responsable }}</td>
                         <td nzAlign="center">{{ data.total_huevos_intactos }}</td>
                         <td style="font-weight: bold; color: #388E3C;" nzAlign="center"><a (click)="startEdit(data.id, 'general')">Editar</a></td>
-                  
+                    </ng-container>
+                    <ng-template #editTemplateGeneral>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.cepa" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.generacion" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.codigo_crianza" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.especie" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.codigo_responsable" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.total_huevos_intactos" /> </td>
+                        <td  nzAlign="center" >
+                            <a style="margin-right: 10px; font-weight: bold; color:#388E3C;"  (click)="saveEdit(data.id, 'general')"> Guardar</a>
+                            <a  style="font-weight: bold; color: #388E3C;" nz-popconfirm nzPopconfirmTitle="Seguro?" (nzOnConfirm)="cancelEdit(data.id, 'general')">Cancelar</a>
+                        </td>
+                    </ng-template>
                 </tr>
                 </tbody>
             </nz-table>
@@ -52,6 +65,7 @@
                 </thead>
                 <tbody class="custom-body">
                 <tr *ngFor="let data of basicTable2.data">
+                    <ng-container *ngIf="!editCache2[data.id].edit; else editTemplateHuevecillos">
                         <td nzAlign="center">{{ data.codigo_sustrato }}</td>
                         <td nzAlign="center">{{ data.fecha_colocacion }}</td>
                         <td nzAlign="center">{{ data.fecha_retiro }}</td>
@@ -62,7 +76,22 @@
                         <td nzAlign="center">{{ data.generacion }}</td>
                         <td nzAlign="center">{{ data.responsable }}</td>
                         <td style="font-weight: bold; color: #388E3C;" nzAlign="center"><a (click)="startEdit(data.id, 'conteo')">Editar</a></td>
-
+                    </ng-container>
+                    <ng-template #editTemplateHuevecillos>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.codigo_sustrato" /> </td>
+                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_colocacion" (ngModelChange)="onDateChange(data.id, $event, 'fecha_colocacion_sustrato')"></nz-date-picker>  </td>
+                        <td >  <nz-date-picker [(ngModel)]="editCache2[data.id].data.fecha_retiro" (ngModelChange)="onDateChange(data.id, $event, 'fecha_retiro_sustrato')"></nz-date-picker>  </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_intactos" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_eclosionados" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.huevos_canoa" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.total_huevos" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.generacion" /> </td>
+                        <td > <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.responsable" /> </td>
+                        <td  nzAlign="center" >
+                            <a  style="margin-right: 10px; font-weight: bold; color:#388E3C;"  (click)="saveEdit(data.id, 'conteo')"> Guardar</a>
+                            <a  style="font-weight: bold; color: #388E3C;" nz-popconfirm nzPopconfirmTitle="Seguro?" (nzOnConfirm)="cancelEdit(data.id, 'conteo')">Cancelar</a>
+                        </td>
+                    </ng-template>
                 </tr>
                 </tbody>
             </nz-table>
