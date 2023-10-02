@@ -20,4 +20,12 @@ export class HistoryDetailsService {
   getConteos(id_datos:any){
     return this.http.get<IConteoDeHuevecillos[]>(`${environment.baseUrl}conteo/${id_datos}`);
   }
+
+  editConteos(id_datos:any,data:any){
+    return this.http.put(`${environment.baseUrl}conteo/${id_datos}`,data);
+  }
+
+  editDatos(id_datos:any,data:any){
+    return this.http.put(`${environment.baseUrl}datos/${id_datos}`,data);
+  }
 }
