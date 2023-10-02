@@ -79,10 +79,12 @@ export class HistoryDetailsComponent implements OnInit {
       const index = this.listOfData.findIndex(item => item.id === id);
       Object.assign(this.listOfData[index], this.editCache[id].data);
       this.editCache[id].edit = false;
+      this.saveDatos(this.listOfData[index].id,this.listOfData[index]);
     } else if (tabla ==='conteo') {
       const index = this.listOfData2.findIndex(item => item.id === id);
       Object.assign(this.listOfData2[index], this.editCache2[id].data);
       this.editCache2[id].edit = false;
+      this.saveConteos(this.listOfData2[index].id,this.listOfData2[index]);
     }
 
     console.log(this.listOfData2)
@@ -126,6 +128,22 @@ export class HistoryDetailsComponent implements OnInit {
       console.log('CACHE 2:', this.editCache2)
       this.updateEditCache();
       this.loading = false;
+    })
+  }
+
+  saveConteos(id:any,data:any): void {
+    console.log('ID',id);
+    console.log('data',data)
+    this.service.editConteos(id,data).subscribe(data => {
+      console.log('EDITADO', data)
+    })
+  }
+
+  saveDatos(id:any,data:any): void {
+    console.log('ID',id);
+    console.log('data',data)
+    this.service.editDatos(id,data).subscribe(data => {
+      console.log('EDITADO', data)
     })
   }
 
