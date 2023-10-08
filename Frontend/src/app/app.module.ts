@@ -25,6 +25,7 @@ import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
+import { PopupPredictComponent } from './popupPredict/popupPredict.component';
 
 const ngZorroConfig: NzConfig = {
   message: { nzTop: '55px' },
@@ -34,7 +35,8 @@ registerLocaleData(es);
 @NgModule({
   declarations: [
     AppComponent,
-    PopupComponent
+    PopupComponent,
+    PopupPredictComponent
   ],
   imports: [
     BrowserModule,

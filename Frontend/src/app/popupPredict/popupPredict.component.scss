@@ -1,0 +1,61 @@
+::ng-deep  .modal-container > mat-dialog-container {
+    //margin-left: 5vw;
+    //margin-top: 5vh;
+    //padding-top: 100px;
+    //display: flex;
+    width: 90vw;
+    height: 60vh;
+    max-width: 100vw;
+    margin-left: 5vw;
+    margin-top: 14vh;
+    border: #388E3C 1px;
+
+    .table-container{
+        width: 80%;
+
+    }
+
+    .buttons-container{
+        margin-top: 3vh;
+        justify-content: space-evenly;
+        button{
+            padding: 10px 20px;
+            background-color: #388E3C;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            z-index: 100000000000;
+        }
+    }
+  }
+
+  .ng-zorro-message {
+    z-index: 2000;  /* o cualquier número suficientemente alto */
+}
+
+  .custom-header {
+    background-color: #388E3C; /* Cambia este color al que desees */
+  }
+
+.custom-header th{
+    background-color: #388E3C; /* Cambia este color al que desees */
+    color: #F2F9F1;
+
+  }
+
+.custom-body {
+    background-color: #DDEEDF;
+  }   
+
+  /* Estilo para el contenedor principal del pop-up */
+.row.w-100 {
+  z-index: 1000; /* Esto coloca el pop-up por encima de otros contenidos en tu página */
+  position: relative; /* Es importante establecer un position diferente a 'static' para que z-index funcione */
+}
+
+/* Estilo para las tablas para asegurarse de que estén por encima de otros elementos dentro del pop-up */
+.table-container nz-table {
+  z-index: 1001; /* Esto coloca las tablas por encima de otros contenidos en tu pop-up */
+  position: relative; /* De nuevo, es importante establecer un position diferente a 'static' */
+}

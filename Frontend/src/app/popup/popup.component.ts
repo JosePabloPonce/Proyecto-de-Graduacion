@@ -9,6 +9,8 @@ import { format, isValid } from 'date-fns';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { PopupService } from './services/popup.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { PopupPredictComponent } from '@app/popupPredict/popupPredict.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -37,6 +39,28 @@ export class PopupComponent implements OnInit {
 
   editCache: { [key: string]: { edit: boolean; data: IDatosGenerales } } = {};
   editCache2: { [key: string]: { edit: boolean; data: IConteoDeHuevecillos } } = {};
+
+  huevosEnCanoa = 0;
+  huevosViables = 0;
+  huevosEclosionados = 0;
+
+
+  openPopup(): void {
+    console.log('ENTRO A OPEN POPUP')
+    const dialogRef = this.dialog.open(PopupPredictComponent,{
+      panelClass: 'modal-container',
+      disableClose: true,
+      data: {
+        huevosEnCanoa: this.listOfData2[0].huevos_canoa ,
+        huevosViables: this.listOfData2[0].huevos_intactos ,
+        huevosEclosionados: this.listOfData2[0].huevos_eclosionados
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   startEdit(id: string, tabla:string): void {
     if(tabla === 'general'){
@@ -140,7 +164,13 @@ export class PopupComponent implements OnInit {
       }
     });
   }
-  constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupService, private message: NzMessageService) {}
+
+  predict(): void {
+    console.log('ENTRO A PREDICT')
+        this.openPopup(); 
+        this.dialogRef.close(); 
+  }
+  constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupService, private message: NzMessageService,  public dialog: MatDialog) {}
 
   ngOnInit(): void {
     
