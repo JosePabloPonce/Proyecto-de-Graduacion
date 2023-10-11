@@ -15,11 +15,13 @@ export class HomepageComponent implements OnInit {
   assetPath3: string | undefined;
   assetPath4: string | undefined;
   selectedFiles: File[] = [];
+  processedImages: string[] = [];
 
   huevosEnCanoa = 0;
   huevosViables = 0;
   huevosEclosionados = 0;
-   
+  detections: any[] = [];
+
   isDragging = false;
   showUploadProgress = false;
   uploadComplete = false;
@@ -168,6 +170,7 @@ continuar(): void {
   const processAllBatches = async (allFiles: File[]) => {
     const totalBatches = Math.ceil(allFiles.length / BATCH_SIZE);
     this.totalBatches = totalBatches;  // Establecer el total de lotes
+    const groupedResults: any[] = []; // Para almacenar los resultados agrupados
 
     for (let i = 0; i < totalBatches; i++) {
       const startIdx = i * BATCH_SIZE;
@@ -178,18 +181,26 @@ continuar(): void {
 
       // Espera a que el lote actual termine antes de continuar al siguiente
       const batchResults = await processBatch(currentBatch);
+      const currentBatchResults: any[] = []; // Para almacenar los resultados del lote actual
+
       for (const result of batchResults) {
         if (result && result.predictions && result.predictions.length > 0) {
           this.results.push(...result.predictions);
+          currentBatchResults.push(result.predictions);
+
         } else {
           console.warn('No se detectaron huevecillos en una de las imágenes.');
         }
       }
+      groupedResults.push(currentBatchResults); // Agregar los resultados del lote actual a los resultados agrupados
+
     }
     this.processingBatch = 0;  // Resetear cuando termina el proceso
 
     console.log("Resultados de todas las imágenes:", this.results);
     this.processData(this.results)
+    this.detections = groupedResults;
+
     console.log(this.huevosEclosionados, this.huevosEnCanoa, this.huevosViables)
 
     if (this.results.length > 0) {
@@ -224,13 +235,20 @@ getBase64FromFile(file: File): Promise<string> {
       data: {
         huevosEnCanoa: this.huevosEnCanoa,
         huevosViables: this.huevosViables,
-        huevosEclosionados: this.huevosEclosionados
+        huevosEclosionados: this.huevosEclosionados,
+        detections: this.detections,
+        images: this.selectedFiles
+
+
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+    this.huevosEnCanoa = 0
+    this.huevosViables = 0
+    this.huevosEclosionados = 0
   }
 
   // Función para abrir el explorador de archivos al hacer clic en el div

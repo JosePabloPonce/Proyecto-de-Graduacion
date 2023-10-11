@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
@@ -13,15 +13,20 @@ import { PopupPredictComponent } from '@app/popupPredict/popupPredict.component'
 import { MatDialog } from '@angular/material/dialog';
 
 
+
 @Component({
   selector: 'app-popup',
   templateUrl: './popup.component.html',
-  styleUrls: ['./popup.component.scss']
+  styleUrls: ['./popup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 
 export class PopupComponent implements OnInit {
 
-  
+  detections: any[] = [];
+  images: File[] = [];
+
   listOfData: IDatosGenerales[] = [
     {
       id: '',
@@ -34,6 +39,21 @@ export class PopupComponent implements OnInit {
     },  
   ];
 
+  currentDate = new Date();
+  updatedData = {
+    id: '',
+    id_user: 0, 
+    codigo_sustrato: ' ',
+    fecha_colocacion:  format(this.currentDate, 'yyyy-MM-dd'),
+    fecha_retiro: format(this.currentDate, 'yyyy-MM-dd'),
+    huevos_intactos: this.data.huevosViables, 
+    huevos_eclosionados: this.data.huevosEclosionados,
+    huevos_canoa: this.data.huevosEnCanoa,
+    total_huevos: this.data.huevosEnCanoa + this.data.huevosEclosionados + this.data.huevosViables,
+    generacion: ' ',
+    responsable: ' ',
+    id_datos: 0
+  };
 
   listOfData2: IConteoDeHuevecillos[] = [];
 
@@ -170,30 +190,23 @@ export class PopupComponent implements OnInit {
         this.openPopup(); 
         this.dialogRef.close(); 
   }
-  constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupService, private message: NzMessageService,  public dialog: MatDialog) {}
+  constructor(public dialogRef: MatDialogRef<PopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupService, private message: NzMessageService,  public dialog: MatDialog) {
+    this.detections = data.detections;
+    this.images = data.images;
+
+  }
 
   ngOnInit(): void {
-    
-    const currentDate = new Date();
-    const updatedData = {
-      id: '',
-      id_user: 0, 
-      codigo_sustrato: ' ',
-      fecha_colocacion:  format(currentDate, 'yyyy-MM-dd'),
-      fecha_retiro: format(currentDate, 'yyyy-MM-dd'),
-      huevos_intactos: this.data.huevosViables, 
-      huevos_eclosionados: this.data.huevosEclosionados,
-      huevos_canoa: this.data.huevosEnCanoa,
-      total_huevos: this.data.huevosEnCanoa + this.data.huevosEclosionados + this.data.huevosViables,
-      generacion: ' ',
-      responsable: ' ',
-      id_datos: 0
-    };
-    this.listOfData2.push(updatedData);
+    console.log('Detections:', this.detections);
+    console.log('Detections:', this.images);
+
+    this.listOfData2.push(this.updatedData);
     this.updateEditCache();
   }
   onClose(): void {
+
     this.dialogRef.close();
+ 
   }
 
 }

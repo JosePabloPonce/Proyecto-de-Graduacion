@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class RoboflowService {
   private roboflowURL = 'https://outline.roboflow.com/';
   private model = 'huevos-de-mosquito';
-  private version = '7';
+  private version = '22';
   private apiKey = 'dI8aF0nk8KR5O16RSguS';
   private confidence = 40;
   constructor(private http: HttpClient) { }

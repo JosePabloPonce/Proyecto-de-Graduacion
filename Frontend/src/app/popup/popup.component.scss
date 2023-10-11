@@ -48,6 +48,20 @@
     background-color: #DDEEDF;
   }   
 
+  .square-image-container {
+    width: 300px;         
+    height: 300px;       
+    overflow: hidden;    
+    display: flex;       
+    justify-content: center;
+    align-items: center;
+}
+
+.square-image {
+    max-width: 100%;     
+    max-height: 100%;  
+    object-fit: cover;  
+}
   /* Estilo para el contenedor principal del pop-up */
 .row.w-100 {
   z-index: 1000; /* Esto coloca el pop-up por encima de otros contenidos en tu página */
