@@ -49,18 +49,28 @@
   }   
 
   .square-image-container {
-    width: 300px;         
-    height: 300px;       
-    overflow: hidden;    
-    display: flex;       
+    width: 300px;  // Tamaño fijo para pantallas grandes
+    height: 300px; // Asegúrate de que es cuadrado para maximizar el espacio para la imagen
+    overflow: hidden;
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (min-width: 768px) and (max-width: 1503px) {
+        width: 200px;  // Tamaño un poco más pequeño para pantallas medianas
+        height: 200px;
+    }
+
+    @media (max-width: 767.98px) {
+        width: 100%;   // Ancho completo para dispositivos móviles
+        height: auto;
+    }
 }
 
 .square-image {
-    max-width: 100%;     
-    max-height: 100%;  
-    object-fit: cover;  
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
   /* Estilo para el contenedor principal del pop-up */
 .row.w-100 {
