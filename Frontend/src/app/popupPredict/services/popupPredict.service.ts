@@ -9,8 +9,8 @@ import { environment } from '@environments/environment.prod';
 })
 export class PopupPredictService {
 
-  saveData(data: any, data2: any){
-    return this.http.post(`${environment.baseUrl}conteo`, {data,data2});
+  predict(data:any){
+    return this.http.post(`${environment.baseUrl}predict`,data);
   }
   constructor(private http: HttpClient) { }
 }

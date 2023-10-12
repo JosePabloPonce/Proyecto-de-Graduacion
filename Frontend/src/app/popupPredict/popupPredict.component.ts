@@ -64,8 +64,10 @@ export class PopupPredictComponent implements OnInit {
   }
 
   guardarDatos(): void {
-    console.log('DATOS', this.listOfData);
-    this.popupservice.saveData(this.listOfData, this.listOfData).subscribe({
+    console.log('DATOS:', this.listOfData)
+    const data = [this.listOfData[0].huevos_viables,this.listOfData[0].huevos_eclosionados,this.listOfData[0].huevos_canoa,
+    this.listOfData[0].F++,this.listOfData[0].temperatura++,this.listOfData[0].dias++]
+    this.popupservice.predict(data).subscribe({
       next: (response) => {
         // Mostrar mensaje de éxito
         this.message.create('success', 'Datos guardados con éxito');
