@@ -86,6 +86,10 @@ export class PopupComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+  document.querySelector('mat-dialog-container')!.scrollTop = 0;
+}
+
   startEdit(id: string, tabla: string): void {
     if (tabla === 'general') {
       this.editCache[id].edit = true;
@@ -176,14 +180,16 @@ export class PopupComponent implements OnInit {
     this.popupservice.saveData(this.listOfData, this.listOfData2).subscribe({
       next: (response) => {
         // Mostrar mensaje de éxito
+        console.log('bueno',response)
         this.message.create('success', 'Datos guardados con éxito');
 
         // Cerrar el diálogo
         this.dialogRef.close();
       },
       error: (error) => {
+        console.log('malo', error)
         // Mostrar mensaje de error
-        this.message.create('error', 'Error guardando datos');
+        this.message.create('error', error.error.error);
 
         // Cerrar el diálogo
         this.dialogRef.close();

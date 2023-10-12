@@ -166,12 +166,9 @@ export class HomepageComponent implements OnInit {
 
         // También usamos el archivo redimensionado para returnImage
         const returnImagePromise = resizedImagePromise.then((resizedFile) => {
-          return this.roboflowService
-            .returnImage(resizedFile)
-            .toPromise()
+          return this.roboflowService.returnImage(resizedFile).toPromise()
             .then((blob) => {
               const imageURL = URL.createObjectURL(blob);
-              this.processedImages.push(imageURL);
               return imageURL;
             });
         });

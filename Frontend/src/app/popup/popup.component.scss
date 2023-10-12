@@ -28,6 +28,10 @@
   }
 }
 
+::ng-deep mat-dialog-container {
+  overflow-y: auto !important;
+}
+
 .custom-header {
   background-color: #388e3c; /* Cambia este color al que desees */
 }
