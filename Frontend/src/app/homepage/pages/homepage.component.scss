@@ -1,113 +1,109 @@
-.color{
-    background-color: #8BC34A;
-    color: #F2F9F1;
+.color {
+  background-color: #8bc34a;
+  color: #f2f9f1;
 }
 
-.huevos{
-    width: auto;
-    height: 150px;
-    object-fit: cover;
+.huevos {
+  width: auto;
+  height: 150px;
+  object-fit: cover;
 }
 
-.flecha{
-    max-width: 10%;
-    height: auto;
+.flecha {
+  max-width: 10%;
+  height: auto;
 }
 
-.camara{
- height: auto; 
- width: 8%;
-
+.camara {
+  height: auto;
+  width: 8%;
 }
 
 .image-upload-list {
-  max-height: 100px;  // Ajusta esta altura según tus necesidades
-  overflow-y: auto;  // Habilita el desplazamiento vertical
-  width: 100%;       // Asegúrate de que ocupe todo el espacio disponible
-  border: 1px solid #ccc;  // Opcional: un borde para que sea visible el área del desplazamiento
-  padding: 10px;     // Espacio interno
-  box-sizing: border-box;  // Asegura que el padding y el borde no aumenten el tamaño del div
+  max-height: 100px; // Ajusta esta altura según tus necesidades
+  overflow-y: auto; // Habilita el desplazamiento vertical
+  width: 100%; // Asegúrate de que ocupe todo el espacio disponible
+  border: 1px solid #ccc; // Opcional: un borde para que sea visible el área del desplazamiento
+  padding: 10px; // Espacio interno
+  box-sizing: border-box; // Asegura que el padding y el borde no aumenten el tamaño del div
 }
 
-.boton-analizar{
-    border-radius: 20px;
-    background: #DDEEDF;
-    color: #388E3C;
-    cursor: pointer;
+.boton-analizar {
+  border-radius: 20px;
+  background: #ddeedf;
+  color: #388e3c;
+  cursor: pointer;
 }
 
 .boton-analizar:hover {
-    box-shadow: 5px 5px 21px rgba(33,33,33,.2); 
-  }
+  box-shadow: 5px 5px 21px rgba(33, 33, 33, 0.2);
+}
 
-
-.borde-titulo{
-    text-align: center;
-    width: 75%;
+.borde-titulo {
+  text-align: center;
+  width: 75%;
 }
 
 .drag-drop-container {
-    border: 2px dashed #7F7F7F;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    transition: background-color 0.3s;
-  }
-  
-  .drag-drop-container.dragging {
-    background-color: #f7f7f7;
-  }
-  
-  .drag-drop-text {
-    color: #7F7F7F;
-    font-weight: bolder;
-    font-size: 14px;
-    margin-top: 10px;
-  }
+  border: 2px dashed #7f7f7f;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
 
-  .upload-progress {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .spinner {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    border-top-color: #333;
-    animation: spin 0.8s linear infinite;
-    margin-right: 10px;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .upload-progress p {
-    margin: 0;
-    margin-right: 5px; /* Agrega el espacio entre el spinner y el párrafo aquí */
-  }
-  
-  .upload-complete {
-    margin-top: 10px;
-  }
-  
-  .upload-complete button {
-    padding: 10px 20px;
-    background-color: #388E3C;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+.drag-drop-container.dragging {
+  background-color: #f7f7f7;
+}
 
-  .upload-complete button:hover{
-    box-shadow: 5px 5px 21px rgba(33,33,33,.2); 
+.drag-drop-text {
+  color: #7f7f7f;
+  font-weight: bolder;
+  font-size: 14px;
+  margin-top: 10px;
+}
 
+.upload-progress {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spin 0.8s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
+}
 
+.upload-progress p {
+  margin: 0;
+  margin-right: 5px; 
+}
+
+.upload-complete {
+  margin-top: 10px;
+}
+
+.upload-complete button {
+  padding: 10px 20px;
+  background-color: #388e3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.upload-complete button:hover {
+  box-shadow: 5px 5px 21px rgba(33, 33, 33, 0.2);
+}

@@ -11,9 +11,9 @@ export class RoboflowService {
   private version = '22';
   private apiKey = 'dI8aF0nk8KR5O16RSguS';
   private confidence = 40;
-  private format1 = 'json'
+  private format1 = 'json';
   private format2 = 'image';
-  private labels = false
+  private labels = false;
   constructor(private http: HttpClient) {}
 
   analyzeImage(file: File): Observable<any> {

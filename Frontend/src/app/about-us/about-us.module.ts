@@ -5,15 +5,8 @@ import { AboutUsRoutingModule } from './about-us-routing.module';
 import { AboutUsComponent } from './pages/about-us.component';
 import { SharedModule } from '@app/shared/shared.module';
 
-
 @NgModule({
-  declarations: [
-    AboutUsComponent
-  ],
-  imports: [
-    CommonModule,
-    AboutUsRoutingModule,
-    SharedModule
-  ]
+  declarations: [AboutUsComponent],
+  imports: [CommonModule, AboutUsRoutingModule, SharedModule],
 })
-export class AboutUsModule { }
+export class AboutUsModule {}

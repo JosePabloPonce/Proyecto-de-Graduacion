@@ -8,13 +8,12 @@ import { environment } from '@environments/environment.prod';
 import { IDatosGenerales } from '@app/history-details/Interfaces/IDatosGenerales';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RandomUserService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getConteos(){
+  getConteos() {
     return this.http.get<IDatosGenerales[]>(`${environment.baseUrl}datos`);
   }
 }

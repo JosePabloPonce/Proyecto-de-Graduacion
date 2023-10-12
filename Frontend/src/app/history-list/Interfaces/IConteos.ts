@@ -7,6 +7,6 @@ export interface IConteos {
     last: string;
   };
   login: {
-    uuid:string
-  }
+    uuid: string;
+  };
 }

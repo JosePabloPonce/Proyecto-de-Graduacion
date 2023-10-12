@@ -237,7 +237,6 @@ export class HomepageComponent implements OnInit {
       console.error('Error durante el procesamiento:', error);
       alert('Hubo un error durante el procesamiento de las imágenes.');
       this.processingBatch = 0; // Resetear cuando termina el proceso
-
     });
   }
 

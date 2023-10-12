@@ -4,13 +4,13 @@ import { HistoryDetailsComponent } from './pages/history-details.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: HistoryDetailsComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HistoryDetailsRoutingModule { }
+export class HistoryDetailsRoutingModule {}

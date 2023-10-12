@@ -14,11 +14,8 @@ import { registerLocaleData } from '@angular/common';
 
 registerLocaleData(es);
 
-
 @NgModule({
-  declarations: [
-    HistoryDetailsComponent
-  ],
+  declarations: [HistoryDetailsComponent],
   imports: [
     CommonModule,
     HistoryDetailsRoutingModule,
@@ -27,7 +24,7 @@ registerLocaleData(es);
     NzPaginationModule,
     FormsModule,
     NzPopconfirmModule,
-    NzDatePickerModule
-  ]
+    NzDatePickerModule,
+  ],
 })
-export class HistoryDetailsModule { }
+export class HistoryDetailsModule {}

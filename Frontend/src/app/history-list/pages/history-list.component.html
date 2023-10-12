@@ -1,36 +1,54 @@
-<div class="container-fluid color" style= "min-height: 100%">
+<div class="container-fluid color" style="min-height: 100%">
+  <div class="container" style="padding-bottom: 10px; padding-top: 100px">
+    <app-navbar></app-navbar>
+    <div style="height: 100%">
+      <h1 class="text-center" style="margin-bottom: 50px; color: #f2f9f1">
+        Historial de Detecciones
+      </h1>
 
-    <div class="container" style=" padding-bottom: 10px; padding-top: 100px;">
-        <app-navbar></app-navbar>
-        <div  style="height: 100%;">
-            <h1 class="text-center" style="margin-bottom: 50px; color: #F2F9F1;" > Historial de Detecciones </h1>
-    
-            <nz-table #editRowTable  #basicTable [nzLoading]="loading"  nzTableLayout="fixed" [nzScroll]="{ x: '1500px' }" [nzData]="listOfData">
-              <thead>
-              <tr class="custom-header">
-                  <th nzAlign="center">Cepa</th>
-                  <th nzAlign="center">Generación</th>
-                  <th nzAlign="center">Código Crianza</th>
-                  <th nzAlign="center">Especie</th>
-                  <th nzAlign="center">Código Responsable</th>
-                  <th nzAlign="center">Total Huevos Intactos</th>
-                  <th nzAlign="center">Mas</th>
-              </tr>
-              </thead>
-              <tbody class="custom-body">
-              <tr *ngFor="let data of basicTable.data">
-                      <td nzAlign="center">{{ data.cepa }}</td>
-                      <td nzAlign="center">{{ data.generacion }}</td>
-                      <td nzAlign="center">{{ data.codigo_crianza }}</td>
-                      <td nzAlign="center">{{ data.especie }}</td>
-                      <td nzAlign="center">{{ data.codigo_responsable }}</td>
-                      <td nzAlign="center">{{ data.total_huevos_intactos }}</td>
-                      <td nzAlign="center">
-                        <a [routerLink]="['/history-details', data.id]" style="font-weight: bold; color: rgb(232, 255, 238); text-decoration: underline; color: #388E3C; border-radius: 5px; ">Ver mas</a>
-                      </td>
-              </tr>
-              </tbody>
-          </nz-table>
-        </div>
+      <nz-table
+        #editRowTable
+        #basicTable
+        [nzLoading]="loading"
+        nzTableLayout="fixed"
+        [nzScroll]="{ x: '1500px' }"
+        [nzData]="listOfData"
+      >
+        <thead>
+          <tr class="custom-header">
+            <th nzAlign="center">Cepa</th>
+            <th nzAlign="center">Generación</th>
+            <th nzAlign="center">Código Crianza</th>
+            <th nzAlign="center">Especie</th>
+            <th nzAlign="center">Código Responsable</th>
+            <th nzAlign="center">Total Huevos Intactos</th>
+            <th nzAlign="center">Mas</th>
+          </tr>
+        </thead>
+        <tbody class="custom-body">
+          <tr *ngFor="let data of basicTable.data">
+            <td nzAlign="center">{{ data.cepa }}</td>
+            <td nzAlign="center">{{ data.generacion }}</td>
+            <td nzAlign="center">{{ data.codigo_crianza }}</td>
+            <td nzAlign="center">{{ data.especie }}</td>
+            <td nzAlign="center">{{ data.codigo_responsable }}</td>
+            <td nzAlign="center">{{ data.total_huevos_intactos }}</td>
+            <td nzAlign="center">
+              <a
+                [routerLink]="['/history-details', data.id]"
+                style="
+                  font-weight: bold;
+                  color: rgb(232, 255, 238);
+                  text-decoration: underline;
+                  color: #388e3c;
+                  border-radius: 5px;
+                "
+                >Ver mas</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
     </div>
+  </div>
 </div>
