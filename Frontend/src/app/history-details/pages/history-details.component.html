@@ -78,7 +78,7 @@
               </td>
               <td>
                 <input
-                  type="text"
+                  type="number"
                   nz-input
                   [(ngModel)]="editCache[data.id].data.total_huevos_intactos"
                 />
@@ -113,7 +113,7 @@
         #basicTable2
         nzShowSizeChanger
         nzTableLayout="fixed"
-        [nzScroll]="{ x: '1700px' }"
+        [nzScroll]="{ x: '2000px' }"
         [nzData]="listOfData2"
         [nzLoading]="loading"
       >
@@ -175,28 +175,28 @@
               </td>
               <td>
                 <input
-                  type="text"
+                  type="number"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_intactos"
                 />
               </td>
               <td>
                 <input
-                  type="text"
+                  type="number"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_eclosionados"
                 />
               </td>
               <td>
                 <input
-                  type="text"
+                  type="number"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_canoa"
                 />
               </td>
               <td>
                 <input
-                  type="text"
+                  type="number"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.total_huevos"
                 />

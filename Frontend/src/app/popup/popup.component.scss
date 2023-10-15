@@ -32,6 +32,9 @@
   overflow-y: auto !important;
 }
 
+.ng-zorro-message {
+  z-index: 2000;  /* o cualquier número suficientemente alto */
+}
 .custom-header {
   background-color: #388e3c; /* Cambia este color al que desees */
 }
@@ -71,6 +74,7 @@
 }
 /* Estilo para el contenedor principal del pop-up */
 .row.w-100 {
+  z-index: 1000; /* Esto coloca el pop-up por encima de otros contenidos en tu página */
   position: relative; /* Es importante establecer un position diferente a 'static' para que z-index funcione */
 }
 

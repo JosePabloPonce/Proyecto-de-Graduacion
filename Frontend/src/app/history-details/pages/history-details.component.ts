@@ -7,6 +7,7 @@ import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { format, isValid } from 'date-fns';
 import { HistoryDetailsService } from '../services/history-details.service';
 import { ActivatedRoute } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-history-details',
@@ -28,6 +29,7 @@ export class HistoryDetailsComponent implements OnInit {
 
   loading = true;
   loading2 = true;
+  dialogRef: any;
 
   startEdit(id: string, tabla: string): void {
     if (tabla === 'general') {
@@ -137,23 +139,44 @@ export class HistoryDetailsComponent implements OnInit {
   saveConteos(id: any, data: any): void {
     console.log('ID', id);
     console.log('data', data);
-    this.service.editConteos(id, data).subscribe((data) => {
-      console.log('EDITADO', data);
+    this.service.editConteos(id, data).subscribe({
+      next: (response) => {
+        // Mostrar mensaje de éxito
+        console.log('bueno',response)
+        this.message.create('success', 'Datos guardados con éxito');
+      },
+      error: (error) => {
+        console.log('malo', error)
+        // Mostrar mensaje de error
+        this.message.create('error', error.error.error);
+
+      },
     });
   }
 
   saveDatos(id: any, data: any): void {
     console.log('ID', id);
     console.log('data', data);
-    this.service.editDatos(id, data).subscribe((data) => {
-      console.log('EDITADO', data);
+    this.service.editDatos(id, data).subscribe({
+      next: (response) => {
+        // Mostrar mensaje de éxito
+        console.log('bueno',response)
+        this.message.create('success', 'Datos guardados con éxito');
+      },
+      error: (error) => {
+        console.log('malo', error)
+        // Mostrar mensaje de error
+        this.message.create('error', error.error.error);
+
+      },
     });
   }
 
   constructor(
     private i18n: NzI18nService,
     private service: HistoryDetailsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private message: NzMessageService,
   ) {}
 
   ngOnInit(): void {
