@@ -11,13 +11,25 @@
     "
   >
     <h2 class="text-center">IMÁGENES</h2>
-    <!-- Contenedor de imágenes -->
+    <h4 class="text-center">
+      Huevos Viables
+      <div class="color-box" [style.background]="colors.viable"></div>
+    </h4>
+    <h4 class="text-center">
+      Huevos en Canoa
+      <div class="color-box" [style.background]="colors.canoa"></div>
+    </h4>
+    <h4 class="text-center">
+      Huevos Eclosionados
+      <div class="color-box" [style.background]="colors.eclosionado"></div>
+    </h4>
+  <br/>
     <div class="row">
       <div
         class="col-lg-3 col-md-6 col-12 mb-4 d-flex flex-column align-items-center"
         *ngFor="let imageUrl of processedImages; let i = index"
       >
-        <h4 class="mb-2">Imagen {{ i + 1 }}</h4>
+        <h4 class="mb-2">{{images[i].name}}</h4>
         <div
           class="square-image-container d-flex justify-content-center align-items-center"
         >
@@ -86,10 +98,10 @@
                 />
               </td>
               <td>
-                <input 
-                  list="especies" 
-                  type="text" 
-                  nz-input 
+                <input
+                  list="especies"
+                  type="text"
+                  nz-input
                   [(ngModel)]="editCache[data.id].data.especie"
                 />
                 <datalist id="especies">
@@ -191,28 +203,32 @@
               </td>
               <td>
                 <input
-                  type="number" min="0"
+                  type="number"
+                  min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_intactos"
                 />
               </td>
               <td>
                 <input
-                  type="number" min="0"
+                  type="number"
+                  min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_eclosionados"
                 />
               </td>
               <td>
                 <input
-                  type="number" min="0"
+                  type="number"
+                  min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_canoa"
                 />
               </td>
               <td>
                 <input
-                  type="number" min="0"
+                  type="number"
+                  min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.total_huevos"
                 />

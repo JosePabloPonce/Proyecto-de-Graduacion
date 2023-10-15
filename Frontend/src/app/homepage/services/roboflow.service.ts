@@ -14,6 +14,7 @@ export class RoboflowService {
   private format1 = 'json';
   private format2 = 'image';
   private labels = false;
+  private overlap = 70;
   constructor(private http: HttpClient) {}
 
   analyzeImage(file: File): Observable<any> {
@@ -21,7 +22,7 @@ export class RoboflowService {
     formData.append('file', file);
 
     let fullURL = `${this.roboflowURL}${this.model}/${this.version}?api_key=${this.apiKey}`;
-    fullURL += `&confidence=${this.confidence}&format=${this.format1}`;
+    fullURL += `&confidence=${this.confidence}&format=${this.format1}&overlap=${this.overlap}`;
 
     return this.http.post(fullURL, formData);
   }

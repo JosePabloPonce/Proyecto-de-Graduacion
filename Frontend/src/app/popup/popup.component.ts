@@ -26,7 +26,11 @@ export class PopupComponent implements OnInit {
   detections: any[] = [];
   images: File[] = [];
   processedImages: string[] = [];
-
+  colors = {
+    viable: '#ac2450 ',   
+    canoa: '#d76abb ',        
+    eclosionado: '#34b598'   
+};
   listOfData: IDatosGenerales[] = [
     {
       id: '',
