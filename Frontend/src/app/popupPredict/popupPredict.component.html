@@ -41,9 +41,28 @@
         </nz-table>
         
     </div>
+    <div class="table-container" style="margin-top: 2%;">
+        <nz-table #editRowTable  #predictionTable  nzTableLayout="fixed" [nzScroll]="{ x: '1000px' }" [nzData]="listOfPrediction" [nzShowPagination]="false">
+            <thead>
+            <tr class="custom-header">
+                <th nzAlign="center">Huevos Viables</th>
+                <th nzAlign="center">Huevos en Canoa</th>
+                <th nzAlign="center">Huevos Eclosionados</th>
+            </tr>
+            </thead>
+            <tbody class="custom-body">
+            <tr *ngFor="let data of predictionTable.data">
+                    <td nzAlign="center">{{ data.HV }}</td>
+                    <td nzAlign="center">{{ data.HE }}</td>
+                    <td nzAlign="center">{{ data.HEC }}</td>
+            </tr>
+            </tbody>
+        </nz-table>
+        
+    </div>
     <div class="buttons-container d-flex flex-row">
-        <button>Predecir</button>
-        <button (click)="guardarDatos()">Guardar</button>
+        <button (click)="predict()">Predecir</button>
+        <button (click)="openPopup()">Guardar</button>
         <button (click)="onClose()">Salir</button>
     </div>
 </div>
