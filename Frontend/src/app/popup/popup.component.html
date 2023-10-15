@@ -86,11 +86,22 @@
                 />
               </td>
               <td>
-                <input
-                  type="text"
-                  nz-input
+                <input 
+                  list="especies" 
+                  type="text" 
+                  nz-input 
                   [(ngModel)]="editCache[data.id].data.especie"
                 />
+                <datalist id="especies">
+                  <option value="Aedes aegypti"></option>
+                  <option value="Aedes albopictus"></option>
+                  <option value="Anopheles gambiae"></option>
+                  <option value="Anopheles stephensi"></option>
+                  <option value="Anopheles funestus"></option>
+                  <option value="Culex pipiens"></option>
+                  <option value="Culex tarsalis"></option>
+                  <option value="Culex quinquefasciatus"></option>
+                </datalist>
               </td>
               <td nzAlign="center">
                 <a
