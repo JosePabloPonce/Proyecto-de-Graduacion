@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { IConteos } from '../Interfaces/IConteos';
 
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';

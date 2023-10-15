@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { IConteos } from '@app/history-list/Interfaces/IConteos';
 import { IDatosGenerales } from '@app/history-details/Interfaces/IDatosGenerales';
 import { IConteoDeHuevecillos } from '@app/history-details/Interfaces/IConteoDeHuevecillos';
 import { format, isValid } from 'date-fns';

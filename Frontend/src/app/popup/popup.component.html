@@ -46,8 +46,6 @@
             <th nzAlign="center">Generación</th>
             <th nzAlign="center">Código Crianza</th>
             <th nzAlign="center">Especie</th>
-            <th nzAlign="center">Código Responsable</th>
-            <th nzAlign="center">Total Huevos Intactos</th>
             <th nzAlign="center">Acción</th>
           </tr>
         </thead>
@@ -60,8 +58,6 @@
               <td nzAlign="center">{{ data.generacion }}</td>
               <td nzAlign="center">{{ data.codigo_crianza }}</td>
               <td nzAlign="center">{{ data.especie }}</td>
-              <td nzAlign="center">{{ data.codigo_responsable }}</td>
-              <td nzAlign="center">{{ data.total_huevos_intactos }}</td>
               <td style="font-weight: bold; color: #388e3c" nzAlign="center">
                 <a (click)="startEdit(data.id, 'general')">Editar</a>
               </td>
@@ -94,20 +90,6 @@
                   type="text"
                   nz-input
                   [(ngModel)]="editCache[data.id].data.especie"
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  nz-input
-                  [(ngModel)]="editCache[data.id].data.codigo_responsable"
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  nz-input
-                  [(ngModel)]="editCache[data.id].data.total_huevos_intactos"
                 />
               </td>
               <td nzAlign="center">
@@ -198,28 +180,28 @@
               </td>
               <td>
                 <input
-                  type="number"
+                  type="number" min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_intactos"
                 />
               </td>
               <td>
                 <input
-                  type="number"
+                  type="number" min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_eclosionados"
                 />
               </td>
               <td>
                 <input
-                  type="number"
+                  type="number" min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.huevos_canoa"
                 />
               </td>
               <td>
                 <input
-                  type="number"
+                  type="number" min="0"
                   nz-input
                   [(ngModel)]="editCache2[data.id].data.total_huevos"
                 />

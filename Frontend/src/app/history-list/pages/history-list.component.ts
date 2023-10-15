@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IConteos } from '../Interfaces/IConteos';
 import { RandomUserService } from '../services/history-list.service';
 
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
