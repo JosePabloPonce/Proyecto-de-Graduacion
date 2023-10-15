@@ -10,7 +10,10 @@ import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { PopupPredictService } from './services/popupPredict.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { IPredicciones } from '@app/history-details/Interfaces/IPredicciones';
-
+import { EggResponse } from '@app/history-details/Interfaces/IEgg';
+import { ChangeDetectorRef } from '@angular/core';
+import { PopupComponent } from '@app/popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-popupPredict',
@@ -32,6 +35,15 @@ export class PopupPredictComponent implements OnInit {
       dias:0
     },  
   ];
+
+  listOfPrediction: EggResponse[] = [
+    {
+      HV:0,
+      HE:0,
+      HEC:0
+    }
+    
+  ]
 
   editCache: { [key: string]: { edit: boolean; data: IPredicciones } } = {};
 
@@ -63,17 +75,63 @@ export class PopupPredictComponent implements OnInit {
     });
   }
 
+  predict(): void {
+    console.log('DATOS:', this.listOfData)
+    const data = [this.listOfData[0].huevos_viables,this.listOfData[0].huevos_eclosionados,this.listOfData[0].huevos_canoa,
+    Number(this.listOfData[0].F),Number(this.listOfData[0].temperatura),Number(this.listOfData[0].dias)]
+    this.popupservice.predict(data).subscribe({
+      next: (response) => {
+        // Mostrar mensaje de éxito
+        this.message.create('success', 'Predicción realizada con éxito');
+        this.listOfPrediction = [response as EggResponse, ...this.listOfPrediction.slice(1)];
+        this.cdr.detectChanges();
+        console.log('PREDICCION:',this.listOfPrediction[0])
+
+        // Cerrar el diálogo
+        //this.dialogRef.close();
+      },
+      error: (error) => {
+        // Mostrar mensaje de error
+        this.message.create('error', 'Error al realizar la predicción',);
+
+        // Cerrar el diálogo
+        this.dialogRef.close();
+      }
+    });
+  }
+
+  openPopup(): void {
+    this.dialogRef.close();
+    const dialogRef = this.dialog.open(PopupComponent, {
+      panelClass: 'modal-container',
+      disableClose: true,
+      data: {
+        huevosEnCanoa: this.listOfPrediction[0].HEC,
+        huevosViables: this.listOfPrediction[0].HV,
+        huevosEclosionados: this.listOfPrediction[0].HE,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result :any) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+
   guardarDatos(): void {
     console.log('DATOS:', this.listOfData)
     const data = [this.listOfData[0].huevos_viables,this.listOfData[0].huevos_eclosionados,this.listOfData[0].huevos_canoa,
-    this.listOfData[0].F++,this.listOfData[0].temperatura++,this.listOfData[0].dias++]
+    Number(this.listOfData[0].F),Number(this.listOfData[0].temperatura),Number(this.listOfData[0].dias)]
     this.popupservice.predict(data).subscribe({
       next: (response) => {
         // Mostrar mensaje de éxito
         this.message.create('success', 'Datos guardados con éxito');
+        this.listOfPrediction = [response as EggResponse, ...this.listOfPrediction.slice(1)];
+        this.cdr.detectChanges();
+        console.log('PREDICCION:',this.listOfPrediction[0])
 
         // Cerrar el diálogo
-        this.dialogRef.close();
+        //this.dialogRef.close();
       },
       error: (error) => {
         // Mostrar mensaje de error
@@ -84,7 +142,7 @@ export class PopupPredictComponent implements OnInit {
       }
     });
   }
-  constructor(public dialogRef: MatDialogRef<PopupPredictComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupPredictService, private message: NzMessageService) {}
+  constructor(public dialog: MatDialog,private cdr: ChangeDetectorRef,public dialogRef: MatDialogRef<PopupPredictComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private i18n: NzI18nService, private popupservice: PopupPredictService, private message: NzMessageService) {}
 
   ngOnInit(): void {
     
