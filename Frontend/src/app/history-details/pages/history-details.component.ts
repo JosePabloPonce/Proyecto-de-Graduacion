@@ -8,6 +8,7 @@ import { format, isValid } from 'date-fns';
 import { HistoryDetailsService } from '../services/history-details.service';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {provideAuth,getAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-history-details',
@@ -30,6 +31,7 @@ export class HistoryDetailsComponent implements OnInit {
   loading = true;
   loading2 = true;
   dialogRef: any;
+  uid: string | null = null;
 
   startEdit(id: string, tabla: string): void {
     if (tabla === 'general') {
@@ -118,9 +120,17 @@ export class HistoryDetailsComponent implements OnInit {
     this.service.getDatos(this.idDatos).subscribe((data) => {
       console.log('DATOS:', data);
       this.listOfData = data;
+      this.getTotalHV();
       console.log('CACHE 1:', this.editCache);
       this.updateEditCache();
       this.loading2 = false;
+    });
+  }
+
+  getTotalHV(): void {
+    this.service.getHV(this.idDatos).subscribe((data) => {
+      console.log('TOTAL_HV:', data);
+      this.listOfData[0].total_huevos_intactos = data[0].HV;
     });
   }
 
@@ -184,6 +194,16 @@ export class HistoryDetailsComponent implements OnInit {
       const id = +params['id']; // El '+' convierte el id de string a number
       console.log(id); // Aquí tienes el id que pasaste con routerLink
       this.idDatos = id;
+    });
+
+    const auth = getAuth();
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.uid = user.uid;
+        console.log('UID',this.uid)
+      } else {
+        console.log('No user is signed in.');
+      }
     });
 
     this.getDatos();

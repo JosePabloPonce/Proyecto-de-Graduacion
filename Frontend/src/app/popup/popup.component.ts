@@ -15,6 +15,7 @@ import { PopupService } from './services/popup.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PopupPredictComponent } from '@app/popupPredict/popupPredict.component';
 import { MatDialog } from '@angular/material/dialog';
+import {provideAuth,getAuth} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-popup',
@@ -70,6 +71,7 @@ export class PopupComponent implements OnInit {
   huevosEnCanoa = 0;
   huevosViables = 0;
   huevosEclosionados = 0;
+  uid: string | null = null;
 
   openPopup(): void {
     console.log('ENTRO A OPEN POPUP');
@@ -199,6 +201,13 @@ export class PopupComponent implements OnInit {
     });
   }
 
+  getUserId(uid:string): void {
+    this.popupservice.getUserId(uid).subscribe((data) => {
+      console.log('userID', data);
+      this.updatedData.id_user = data[0].id
+    });
+  }
+
   predict(): void {
     console.log('ENTRO A PREDICT');
     this.openPopup();
@@ -221,6 +230,16 @@ export class PopupComponent implements OnInit {
     console.log('Detections:', this.detections);
     console.log('Imagenes:', this.images);
     console.log('processed', this.processedImages);
+    const auth = getAuth();
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.uid = user.uid;
+        console.log('UID',this.uid)
+        this.getUserId(user.uid);
+      } else {
+        console.log('No user is signed in.');
+      }
+    });
 
     this.listOfData2.push(this.updatedData);
     this.updateEditCache();

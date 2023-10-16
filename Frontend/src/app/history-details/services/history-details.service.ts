@@ -22,6 +22,18 @@ export class HistoryDetailsService {
     );
   }
 
+  getHV(id_datos: any) {
+    return this.http.get<any>(
+      `${environment.baseUrl}total/${id_datos}`
+    );
+  }
+
+  getUserId(id_datos: any) {
+    return this.http.get<any>(
+      `${environment.baseUrl}userID/${id_datos}`
+    );
+  }
+
   editConteos(id_datos: any, data: any) {
     return this.http.put(`${environment.baseUrl}conteo/${id_datos}`, data);
   }
