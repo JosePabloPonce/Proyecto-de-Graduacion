@@ -15,4 +15,10 @@ export class RandomUserService {
   getConteos() {
     return this.http.get<IDatosGenerales[]>(`${environment.baseUrl}datos`);
   }
+
+  getHV(id_datos: any) {
+    return this.http.get<any>(
+      `${environment.baseUrl}total/${id_datos}`
+    );
+  }
 }

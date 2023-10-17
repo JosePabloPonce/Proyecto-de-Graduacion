@@ -3,6 +3,8 @@ import { RandomUserService } from '../services/history-list.service';
 
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { IDatosGenerales } from '@app/history-details/Interfaces/IDatosGenerales';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-history-list',
@@ -16,13 +18,20 @@ export class HistoryListComponent implements OnInit {
 
   listOfData: IDatosGenerales[] = [];
 
-  getConteos(): void {
+  async getTotalHV(id: any): Promise<any> {
+    const data = await this.randomUserService.getHV(id).toPromise();
+    return data[0].HV;
+  }
+
+  async getConteos(): Promise<void> {
     this.loading = true;
-    this.randomUserService.getConteos().subscribe((data) => {
-      this.loading = false;
-      console.log(data);
-      this.listOfData = data;
-    });
+    const data = await this.randomUserService.getConteos().toPromise();
+    for (let conteo of data!){
+      const HV = await this.getTotalHV(conteo.id);
+      conteo.total_huevos_intactos = HV;
+    }
+    this.listOfData = data!;
+    this.loading = false;
   }
 
   constructor(private randomUserService: RandomUserService) {}
