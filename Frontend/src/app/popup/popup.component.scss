@@ -1,45 +1,95 @@
-::ng-deep  .modal-container > mat-dialog-container {
-    //margin-left: 5vw;
-    //margin-top: 5vh;
-    //padding-top: 100px;
-    //display: flex;
-    width: 90vw;
-    height: 60vh;
-    max-width: 100vw;
-    margin-left: 5vw;
-    margin-top: 14vh;
-    border: #388E3C 1px;
+::ng-deep .modal-container > mat-dialog-container {
+  //margin-left: 5vw;
+  //margin-top: 5vh;
+  //padding-top: 100px;
+  //display: flex;
+  width: 90vw;
+  height: 60vh;
+  max-width: 100vw;
+  margin-left: 5vw;
+  margin-top: 14vh;
+  border: #388e3c 1px;
 
-    .table-container{
-        width: 80%;
+  .table-container {
+    width: 80%;
+  }
 
-    }
-
-    .buttons-container{
-        margin-top: 3vh;
-        justify-content: space-evenly;
-        button{
-            padding: 10px 20px;
-            background-color: #388E3C;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 100000000000;
-        }
+  .buttons-container {
+    margin-top: 3vh;
+    justify-content: space-evenly;
+    button {
+      padding: 10px 20px;
+      background-color: #388e3c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
     }
   }
-  .custom-header {
-    background-color: #388E3C; /* Cambia este color al que desees */
-  }
+}
 
-.custom-header th{
-    background-color: #388E3C; /* Cambia este color al que desees */
-    color: #F2F9F1;
+::ng-deep mat-dialog-container {
+  overflow-y: auto !important;
+}
 
-  }
+.ng-zorro-message {
+  z-index: 2000;  /* o cualquier número suficientemente alto */
+}
+.custom-header {
+  background-color: #388e3c; /* Cambia este color al que desees */
+}
+
+.custom-header th {
+  background-color: #388e3c; /* Cambia este color al que desees */
+  color: #f2f9f1;
+}
 
 .custom-body {
-    background-color: #DDEEDF;
-  }   
+  background-color: #ddeedf;
+}
+
+.square-image-container {
+  width: 300px; // Tamaño fijo para pantallas grandes
+  height: 300px; // Asegúrate de que es cuadrado para maximizar el espacio para la imagen
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (min-width: 768px) and (max-width: 1503px) {
+    width: 200px; // Tamaño un poco más pequeño para pantallas medianas
+    height: 200px;
+  }
+
+  @media (max-width: 767.98px) {
+    width: 100%; // Ancho completo para dispositivos móviles
+    height: auto;
+  }
+}
+
+.square-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+/* Estilo para el contenedor principal del pop-up */
+.row.w-100 {
+  z-index: 1000; /* Esto coloca el pop-up por encima de otros contenidos en tu página */
+  position: relative; /* Es importante establecer un position diferente a 'static' para que z-index funcione */
+}
+.color-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+/* Estilo para las tablas para asegurarse de que estén por encima de otros elementos dentro del pop-up */
+.table-container nz-table {
+  z-index: 1001; /* Esto coloca las tablas por encima de otros contenidos en tu pop-up */
+  position: relative; /* De nuevo, es importante establecer un position diferente a 'static' */
+}
+
+::ng-deep .cdk-overlay-backdrop {
+  z-index: 0 !important;
+}

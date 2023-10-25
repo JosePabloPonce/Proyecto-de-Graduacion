@@ -4,13 +4,13 @@ import { HistoryListComponent } from './pages/history-list.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component: HistoryListComponent
+    path: '',
+    component: HistoryListComponent,
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HistoryListRoutingModule { }
+export class HistoryListRoutingModule {}

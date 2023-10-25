@@ -1,54 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { IConteos } from '../Interfaces/IConteos';
 import { RandomUserService } from '../services/history-list.service';
 
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { IDatosGenerales } from '@app/history-details/Interfaces/IDatosGenerales';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-history-list',
   templateUrl: './history-list.component.html',
-  styleUrls: ['./history-list.component.scss']
+  styleUrls: ['./history-list.component.scss'],
 })
 export class HistoryListComponent implements OnInit {
+  results = 11;
 
-  total = 1;
-  listOfRandomUser: IConteos[] = [];
   loading = true;
-  pageSize = 10;
-  pageIndex = 1;
-  filterGender = [
-    { text: 'male', value: 'male' },
-    { text: 'female', value: 'female' }
-  ];
 
-  loadDataFromServer(
-    pageIndex: number,
-    pageSize: number,
-    sortField: string | null,
-    sortOrder: string | null,
-    filter: Array<{ key: string; value: string[] }>
-  ): void {
+  listOfData: IDatosGenerales[] = [];
+
+  async getTotalHV(id: any): Promise<any> {
+    const data = await this.randomUserService.getHV(id).toPromise();
+    return data[0].HV;
+  }
+
+  async getConteos(): Promise<void> {
     this.loading = true;
-    this.randomUserService.getUsers(pageIndex, pageSize, sortField, sortOrder, filter).subscribe(data => {
-      this.loading = false;
-      this.total = 200; // mock the total data here
-      this.listOfRandomUser = data.results;
-    });
+    const data = await this.randomUserService.getConteos().toPromise();
+    for (let conteo of data!){
+      const HV = await this.getTotalHV(conteo.id);
+      conteo.total_huevos_intactos = HV;
+    }
+    this.listOfData = data!;
+    this.loading = false;
   }
 
-  onQueryParamsChange(params: NzTableQueryParams): void {
-    console.log(params);
-    const { pageSize, pageIndex, sort, filter } = params;
-    const currentSort = sort.find(item => item.value !== null);
-    const sortField = (currentSort && currentSort.key) || null;
-    const sortOrder = (currentSort && currentSort.value) || null;
-    this.loadDataFromServer(pageIndex, pageSize, sortField, sortOrder, filter);
-  }
-
-  constructor(private randomUserService: RandomUserService) { }
+  constructor(private randomUserService: RandomUserService) {}
 
   ngOnInit(): void {
-    this.loadDataFromServer(this.pageIndex, this.pageSize, null, null, []);
+    this.getConteos();
   }
-
 }

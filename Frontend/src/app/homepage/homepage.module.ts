@@ -9,17 +9,14 @@ import { PopupComponent } from '../popup/popup.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
 @NgModule({
-  declarations: [
-    HomepageComponent
-  ],
+  declarations: [HomepageComponent],
   imports: [
     CommonModule,
     HomepageRoutingModule,
     RouterModule,
     SharedModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+  ],
 })
-export class HomepageModule { }
+export class HomepageModule {}

@@ -7,17 +7,14 @@ import { SharedModule } from '@app/shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
-
 @NgModule({
-  declarations: [
-    HistoryListComponent
-  ],
+  declarations: [HistoryListComponent],
   imports: [
     CommonModule,
     HistoryListRoutingModule,
     SharedModule,
     NzTableModule,
-    NzPaginationModule
-  ]
+    NzPaginationModule,
+  ],
 })
-export class HistoryListModule { }
+export class HistoryListModule {}

@@ -1,0 +1,68 @@
+<div class="row w-100 h-100 justify-content-center align-items-center flex-column" style="background-color: white; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: #388E3C; border-width: 5px;">
+    <h2 class="text-center">PREDICCIÓN</h2>
+    <div class="table-container">
+        <nz-table #editRowTable  #basicTable  nzTableLayout="fixed" [nzScroll]="{ x: '2000px' }" [nzData]="listOfData" [nzShowPagination]="false">
+            <thead>
+            <tr class="custom-header">
+                <th nzAlign="center">Huevos Viables</th>
+                <th nzAlign="center">Huevos en Canoa</th>
+                <th nzAlign="center">Huevos Eclosionados</th>
+                <th nzAlign="center">F</th>
+                <th nzAlign="center">Temperatura</th>
+                <th nzAlign="center">Días</th>
+            </tr>
+            </thead>
+            <tbody class="custom-body">
+            <tr *ngFor="let data of basicTable.data">
+                <ng-container *ngIf="!editCache[data.id].edit; else editTemplateGeneral">
+                    <td nzAlign="center">{{ data.huevos_viables }}</td>
+                    <td nzAlign="center">{{ data.huevos_eclosionados }}</td>
+                    <td nzAlign="center">{{ data.huevos_canoa }}</td>
+                    <td nzAlign="center">{{ data.F }}</td>
+                    <td nzAlign="center">{{ data.temperatura }}</td>
+                    <td nzAlign="center">{{ data.dias }}</td>
+                    <td style="font-weight: bold; color: #388E3C;" nzAlign="center"><a (click)="startEdit(data.id)">Editar</a></td>
+                </ng-container>
+
+                <ng-template #editTemplateGeneral>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.huevos_viables" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.huevos_eclosionados" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.huevos_canoa" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.F" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.temperatura" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.dias" /> </td>
+                    <td  nzAlign="center" >
+                        <a style="margin-right: 10px; font-weight: bold; color:#388E3C;"  (click)="saveEdit(data.id)"> Guardar</a>
+                        <a  style="font-weight: bold; color: #388E3C;" nz-popconfirm nzPopconfirmTitle="Seguro?" (nzOnConfirm)="cancelEdit(data.id, 'general')">Cancelar</a>
+                    </td>
+                </ng-template>
+            </tr>
+            </tbody>
+        </nz-table>
+        
+    </div>
+    <div class="table-container" style="margin-top: 2%;">
+        <nz-table #editRowTable  #predictionTable  nzTableLayout="fixed" [nzScroll]="{ x: '1000px' }" [nzData]="listOfPrediction" [nzShowPagination]="false">
+            <thead>
+            <tr class="custom-header">
+                <th nzAlign="center">Huevos Viables</th>
+                <th nzAlign="center">Huevos en Canoa</th>
+                <th nzAlign="center">Huevos Eclosionados</th>
+            </tr>
+            </thead>
+            <tbody class="custom-body">
+            <tr *ngFor="let data of predictionTable.data">
+                    <td nzAlign="center">{{ data.HV }}</td>
+                    <td nzAlign="center">{{ data.HE }}</td>
+                    <td nzAlign="center">{{ data.HEC }}</td>
+            </tr>
+            </tbody>
+        </nz-table>
+        
+    </div>
+    <div class="buttons-container d-flex flex-row">
+        <button (click)="predict()">Predecir</button>
+        <button (click)="openPopup()">Guardar</button>
+        <button (click)="onClose()">Salir</button>
+    </div>
+</div>

@@ -1,30 +1,276 @@
-<div class="row w-100 h-100 justify-content-center align-items-center flex-column" style="background-color: white; margin-left: 0px; margin-right: 0px; border-style: solid; border-color: #388E3C; border-width: 5px;">
+<div class="main-container">
+  <div
+    class="row w-100 h-100 justify-content-center align-items-center flex-column"
+    style="
+      background-color: white;
+      margin-left: 0px;
+      margin-right: 0px;
+      border-style: solid;
+      border-color: #388e3c;
+      border-width: 5px;
+    "
+  >
+    <h2 class="text-center">IMÁGENES</h2>
+    <h4 class="text-center">
+      Huevos Viables
+      <div class="color-box" [style.background]="colors.viable"></div>
+    </h4>
+    <h4 class="text-center">
+      Huevos en Canoa
+      <div class="color-box" [style.background]="colors.canoa"></div>
+    </h4>
+    <h4 class="text-center">
+      Huevos Eclosionados
+      <div class="color-box" [style.background]="colors.eclosionado"></div>
+    </h4>
+  <br/>
+    <div class="row">
+      <div
+        class="col-lg-3 col-md-6 col-12 mb-4 d-flex flex-column align-items-center"
+        *ngFor="let imageUrl of processedImages; let i = index"
+      >
+        <h4 class="mb-2">{{images[i].name}}</h4>
+        <div
+          class="square-image-container d-flex justify-content-center align-items-center"
+        >
+          <img
+            [src]="imageUrl"
+            alt="Imagen {{ i + 1 }}"
+            class="img-fluid square-image"
+          />
+        </div>
+      </div>
+    </div>
+
     <h2 class="text-center">CONTEO</h2>
     <div class="table-container">
-      <nz-table nzTableLayout="fixed" [nzNoResult]="'Resultados del modelo'" [nzShowPagination]="false">
+      <nz-table
+        #editRowTable
+        #basicTable
+        nzTableLayout="fixed"
+        [nzScroll]="{ x: '1500px' }"
+        [nzData]="listOfData"
+        [nzShowPagination]="false"
+      >
         <thead>
-            <tr class="custom-header">
-                <th nzAlign="center">Responsable</th>
-                <th nzAlign="center">HV</th>
-                <th nzAlign="center">HE</th>
-                <th nzAlign="center">HEC</th>
-                <th nzAlign="center">Total</th>
-            </tr>
+          <tr class="custom-header">
+            <th nzAlign="center">Cepa</th>
+            <th nzAlign="center">Generación</th>
+            <th nzAlign="center">Código Crianza</th>
+            <th nzAlign="center">Especie</th>
+            <th nzAlign="center">Acción</th>
+          </tr>
         </thead>
         <tbody class="custom-body">
-            <tr *ngFor="let data of tableData" class="custom-body">
-                <td nzAlign="center">{{ data.responsable }}</td>
-                <td nzAlign="center">{{ data.hv }}</td>
-                <td nzAlign="center">{{ data.he }}</td>
-                <td nzAlign="center">{{ data.hec }}</td>
-                <td nzAlign="center">{{ data.total }}</td>
-            </tr>
+          <tr *ngFor="let data of basicTable.data">
+            <ng-container
+              *ngIf="!editCache[data.id].edit; else editTemplateGeneral"
+            >
+              <td nzAlign="center">{{ data.cepa }}</td>
+              <td nzAlign="center">{{ data.generacion }}</td>
+              <td nzAlign="center">{{ data.codigo_crianza }}</td>
+              <td nzAlign="center">{{ data.especie }}</td>
+              <td style="font-weight: bold; color: #388e3c" nzAlign="center">
+                <a (click)="startEdit(data.id, 'general')">Editar</a>
+              </td>
+            </ng-container>
+
+            <ng-template #editTemplateGeneral>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache[data.id].data.cepa"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache[data.id].data.generacion"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache[data.id].data.codigo_crianza"
+                />
+              </td>
+              <td>
+                <input
+                  list="especies"
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache[data.id].data.especie"
+                />
+                <datalist id="especies">
+                  <option value="Aedes aegypti"></option>
+                  <option value="Aedes albopictus"></option>
+                  <option value="Anopheles gambiae"></option>
+                  <option value="Anopheles stephensi"></option>
+                  <option value="Anopheles funestus"></option>
+                  <option value="Culex pipiens"></option>
+                  <option value="Culex tarsalis"></option>
+                  <option value="Culex quinquefasciatus"></option>
+                </datalist>
+              </td>
+              <td nzAlign="center">
+                <a
+                  style="margin-right: 10px; font-weight: bold; color: #388e3c"
+                  (click)="saveEdit(data.id, 'general')"
+                >
+                  Guardar</a
+                >
+                <a
+                  style="font-weight: bold; color: #388e3c"
+                  nz-popconfirm
+                  nzPopconfirmTitle="Seguro?"
+                  (nzOnConfirm)="cancelEdit(data.id, 'general')"
+                  >Cancelar</a
+                >
+              </td>
+            </ng-template>
+          </tr>
         </tbody>
-    </nz-table>
+      </nz-table>
+
+      <br />
+
+      <nz-table
+        #basicTable2
+        nzShowSizeChanger
+        nzTableLayout="fixed"
+        [nzScroll]="{ x: '2000px' }"
+        [nzData]="listOfData2"
+        [nzShowPagination]="false"
+      >
+        <thead>
+          <tr class="custom-header">
+            <th nzAlign="center">Código Sustrato</th>
+            <th nzAlign="center">Fecha Colocación Sustrato</th>
+            <th nzAlign="center">Fecha Retiro Sustrato</th>
+            <th nzAlign="center">Huevos Viables</th>
+            <th nzAlign="center">Huevos Eclosionados</th>
+            <th nzAlign="center">Huevos en Canoa</th>
+            <th nzAlign="center">Total de Huevos</th>
+            <th nzAlign="center">Generacion Filial</th>
+            <th nzAlign="center">Responsable Conteo Huevos</th>
+            <th nzAlign="center">Acción</th>
+          </tr>
+        </thead>
+        <tbody class="custom-body">
+          <tr *ngFor="let data of basicTable2.data">
+            <ng-container
+              *ngIf="!editCache2[data.id].edit; else editTemplateHuevecillos"
+            >
+              <td nzAlign="center">{{ data.codigo_sustrato }}</td>
+              <td nzAlign="center">{{ data.fecha_colocacion }}</td>
+              <td nzAlign="center">{{ data.fecha_retiro }}</td>
+              <td nzAlign="center">{{ data.huevos_intactos }}</td>
+              <td nzAlign="center">{{ data.huevos_eclosionados }}</td>
+              <td nzAlign="center">{{ data.huevos_canoa }}</td>
+              <td nzAlign="center">{{ data.total_huevos }}</td>
+              <td nzAlign="center">{{ data.generacion }}</td>
+              <td nzAlign="center">{{ data.responsable }}</td>
+              <td style="font-weight: bold; color: #388e3c" nzAlign="center">
+                <a (click)="startEdit(data.id, 'conteo')">Editar</a>
+              </td>
+            </ng-container>
+            <ng-template #editTemplateHuevecillos>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.codigo_sustrato"
+                />
+              </td>
+              <td>
+                <nz-date-picker
+                  [(ngModel)]="editCache2[data.id].data.fecha_colocacion"
+                  (ngModelChange)="
+                    onDateChange(data.id, $event, 'fecha_colocacion')
+                  "
+                ></nz-date-picker>
+              </td>
+              <td>
+                <nz-date-picker
+                  [(ngModel)]="editCache2[data.id].data.fecha_retiro"
+                  (ngModelChange)="
+                    onDateChange(data.id, $event, 'fecha_retiro')
+                  "
+                ></nz-date-picker>
+              </td>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.huevos_intactos"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.huevos_eclosionados"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.huevos_canoa"
+                />
+              </td>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.total_huevos"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.generacion"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  nz-input
+                  [(ngModel)]="editCache2[data.id].data.responsable"
+                />
+              </td>
+              <td nzAlign="center">
+                <a
+                  style="margin-right: 10px; font-weight: bold; color: #388e3c"
+                  (click)="saveEdit(data.id, 'conteo')"
+                >
+                  Guardar</a
+                >
+                <a
+                  style="font-weight: bold; color: #388e3c"
+                  nz-popconfirm
+                  nzPopconfirmTitle="Seguro?"
+                  (nzOnConfirm)="cancelEdit(data.id, 'conteo')"
+                  >Cancelar</a
+                >
+              </td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </nz-table>
     </div>
     <div class="buttons-container d-flex flex-row">
-        <button>Predecir</button>
-        <button>Guardar</button>
-        <button (click)="onClose()">Regresar</button>
+      <button (click)="predict()">Predecir</button>
+      <button (click)="guardarDatos()">Guardar</button>
+      <button (click)="onClose()">Regresar</button>
     </div>
+  </div>
 </div>

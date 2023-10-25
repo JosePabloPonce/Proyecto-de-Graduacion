@@ -18,13 +18,27 @@ import { PopupComponent } from './popup/popup.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { FormsModule } from '@angular/forms';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
+import { PopupPredictComponent } from './popupPredict/popupPredict.component';
+import { SafeUrlPipe } from './popup/url.pipe';
 
-
+const ngZorroConfig: NzConfig = {
+  message: { nzTop: '55px' },
+};
+registerLocaleData(es);
 
 @NgModule({
   declarations: [
     AppComponent,
-    PopupComponent
+    PopupComponent,
+    PopupPredictComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,
@@ -36,9 +50,14 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     provideAuth(()=> getAuth()),
     SharedModule,
     NzTableModule,
-    NzPaginationModule
+    NzPaginationModule,
+    FormsModule,
+    NzPopconfirmModule,
+    NzDatePickerModule,
+    NzMessageModule
+
   ],
-  providers: [{ provide: NZ_I18N, useValue: es_ES }],
+  providers: [{ provide: NZ_I18N, useValue: es_ES },  { provide: NZ_CONFIG, useValue: ngZorroConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
