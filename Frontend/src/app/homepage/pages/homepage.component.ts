@@ -145,7 +145,7 @@ export class HomepageComponent implements OnInit {
       return;
     }
 
-    const BATCH_SIZE = 10;
+    const BATCH_SIZE = 5;
 
     // Esta función procesa un lote y devuelve una promesa
     const processBatch = (filesBatch: File[]): Promise<any[]> => {
