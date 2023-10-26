@@ -8,5 +8,5 @@ export const environment = {
     messagingSenderId: '59106365632',
   },
   production: true,
-  baseUrl: 'http://localhost:3000/'
+  baseUrl: 'https://backend-conteo.vercel.app/'
 };
