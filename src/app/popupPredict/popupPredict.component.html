@@ -10,6 +10,9 @@
                 <th nzAlign="center">F</th>
                 <th nzAlign="center">Temperatura</th>
                 <th nzAlign="center">Días</th>
+                <th nzAlign="center">Longitud</th>
+                <th nzAlign="center">Ancho</th>
+                <th nzAlign="center">Acción</th>
             </tr>
             </thead>
             <tbody class="custom-body">
@@ -21,6 +24,8 @@
                     <td nzAlign="center">{{ data.F }}</td>
                     <td nzAlign="center">{{ data.temperatura }}</td>
                     <td nzAlign="center">{{ data.dias }}</td>
+                    <td nzAlign="center">{{ data.longitud }}</td>
+                    <td nzAlign="center">{{ data.ancho }}</td>
                     <td style="font-weight: bold; color: #388E3C;" nzAlign="center"><a (click)="startEdit(data.id)">Editar</a></td>
                 </ng-container>
 
@@ -31,6 +36,8 @@
                     <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.F" /> </td>
                     <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.temperatura" /> </td>
                     <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.dias" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.longitud" /> </td>
+                    <td > <input type="text" nz-input [(ngModel)]="editCache[data.id].data.ancho" /> </td>
                     <td  nzAlign="center" >
                         <a style="margin-right: 10px; font-weight: bold; color:#388E3C;"  (click)="saveEdit(data.id)"> Guardar</a>
                         <a  style="font-weight: bold; color: #388E3C;" nz-popconfirm nzPopconfirmTitle="Seguro?" (nzOnConfirm)="cancelEdit(data.id, 'general')">Cancelar</a>

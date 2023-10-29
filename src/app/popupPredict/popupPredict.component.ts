@@ -31,7 +31,9 @@ export class PopupPredictComponent implements OnInit {
       huevos_canoa: this.data.huevosEnCanoa++,
       F:0,
       temperatura:0,
-      dias:0
+      dias:0,
+      longitud:0,
+      ancho:0
     },  
   ];
 

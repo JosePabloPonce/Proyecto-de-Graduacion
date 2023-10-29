@@ -6,4 +6,6 @@ export interface IPredicciones {
   F: number;
   temperatura: number;
   dias: number;
+  longitud:number;
+  ancho:number;
 }

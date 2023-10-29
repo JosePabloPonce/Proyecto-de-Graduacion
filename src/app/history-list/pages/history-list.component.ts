@@ -25,12 +25,10 @@ export class HistoryListComponent implements OnInit {
 
   async getConteos(): Promise<void> {
     this.loading = true;
-    const data = await this.randomUserService.getConteos().toPromise();
-    for (let conteo of data!){
-      const HV = await this.getTotalHV(conteo.id);
-      conteo.total_huevos_intactos = HV;
-    }
-    this.listOfData = data!;
+    this.randomUserService.getConteos().subscribe((data) => {
+      console.log(data);
+      this.listOfData = data;
+    });
     this.loading = false;
   }
 
