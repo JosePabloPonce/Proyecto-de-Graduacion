@@ -78,13 +78,17 @@ export class PopupPredictComponent implements OnInit {
 
   predict(): void {
     console.log('DATOS:', this.listOfData)
-    const data = [this.listOfData[0].huevos_viables,this.listOfData[0].huevos_eclosionados,this.listOfData[0].huevos_canoa,
-    Number(this.listOfData[0].F),Number(this.listOfData[0].temperatura),Number(this.listOfData[0].dias)]
+    const area = this.listOfData[0].longitud * this.listOfData[0].ancho
+    const data = [Number(this.listOfData[0].F),Number(this.listOfData[0].temperatura),Number(this.listOfData[0].dias),
+    this.listOfData[0].huevos_viables/area,this.listOfData[0].huevos_eclosionados/area,this.listOfData[0].huevos_canoa/area]
     this.popupservice.predict(data).subscribe({
-      next: (response) => {
+      next: (response:any) => {
         // Mostrar mensaje de éxito
+        console.log('RESPONSE',response)
         this.message.create('success', 'Predicción realizada con éxito');
-        this.listOfPrediction = [response as EggResponse, ...this.listOfPrediction.slice(1)];
+        this.listOfPrediction[0].HV = response[0][0]
+        this.listOfPrediction[0].HE = response[0][1]
+        this.listOfPrediction[0].HEC = response[0][2]
         this.cdr.detectChanges();
         console.log('PREDICCION:',this.listOfPrediction[0])
 
